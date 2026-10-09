@@ -1,0 +1,42 @@
+---
+// Ilustración de animalito. Si existe `src` muestra la imagen (PNG transparente, sin recorte);
+// si no, un placeholder suave. Las imágenes viven en /public/img.
+interface Props {
+  label: string;
+  src?: string;
+  shape?: 'circle' | 'rounded' | 'rect';
+  radius?: number;
+  /** Margen interno para que la acuarela respire dentro de su contenedor */
+  pad?: string;
+  class?: string;
+}
+const { label, src, shape = 'rounded', radius = 14, pad = '0', class: cls } = Astro.props;
+const borderRadius = shape === 'circle' ? '50%' : shape === 'rect' ? '0' : `${radius}px`;
+---
+{src ? (
+  <img
+    src={src}
+    alt={label}
+    loading="lazy"
+    decoding="async"
+    class:list={['h-full w-full object-contain drop-shadow-[0_8px_10px_rgb(51_66_47/.12)]', cls]}
+    style={{ padding: pad }}
+  />
+) : (
+  <div
+    role="img"
+    aria-label={label}
+    class:list={['flex h-full w-full flex-col items-center justify-center gap-1.5 overflow-hidden p-3 text-center', cls]}
+    style={{
+      borderRadius,
+      backgroundColor: 'var(--color-sage-150)',
+      backgroundImage:
+        'radial-gradient(circle at 10px 10px, rgb(125 148 120 / .18) 1.6px, transparent 2.2px)',
+      backgroundSize: '20px 20px',
+      boxShadow: 'inset 0 0 0 1.5px rgb(125 148 120 / .28)',
+    }}
+  >
+    <span aria-hidden="true" class="text-[clamp(16px,4vw,22px)] leading-none text-sage-500">✦</span>
+    <span class="max-w-[90%] text-[11px] leading-snug font-bold text-ink-soft">{label}</span>
+  </div>
+)}

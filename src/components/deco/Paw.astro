@@ -1,0 +1,23 @@
+---
+// Huellita de animal (almohadilla + 4 dedos)
+interface Props {
+  size: number;
+  color: string;
+  class?: string;
+  style?: Record<string, string | number | undefined>;
+}
+const { size, color, class: cls, style } = Astro.props;
+const toe = size * 0.24;
+const toes = [
+  ['0%', '24%'],
+  ['22%', '2%'],
+  ['54%', '2%'],
+  ['76%', '24%'],
+];
+---
+<div aria-hidden="true" class:list={['relative', cls]} style={{ width: `${size}px`, height: `${size}px`, ...style }}>
+  <div class="absolute top-[44%] left-[19%] h-1/2 w-[62%]" style={{ borderRadius: '50% 50% 44% 44%', background: color }}></div>
+  {toes.map(([l, t]) => (
+    <div class="absolute rounded-full" style={{ left: l, top: t, width: `${toe}px`, height: `${toe * 1.1}px`, background: color }}></div>
+  ))}
+</div>

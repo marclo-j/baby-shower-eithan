@@ -1,0 +1,101 @@
+---
+import { event } from '../config/event';
+---
+<div id="reserve-modal" hidden class="fixed inset-0 z-[120] flex items-center justify-center bg-ink/45 p-5 backdrop-blur-[3px]">
+  <div
+    role="dialog"
+    aria-modal="true"
+    aria-label="Reservar regalo"
+    class="animate-modal-in relative w-full max-w-[400px] rounded-[28px] bg-cream px-6 pt-[30px] pb-6 text-center shadow-[0_30px_70px_-20px_rgb(51_66_47/.6)]"
+  >
+    <button type="button" data-close aria-label="Cerrar" class="absolute top-3 right-3 h-11 w-11 rounded-full text-[22px] text-ink-soft hover:bg-sage-100">×</button>
+
+    <div data-step="form" class="flex flex-col items-center">
+      <div class="eyebrow tracking-[.2em]">Reservar regalo</div>
+      <div data-gift-name class="mt-2 font-display text-[28px] leading-[1.15] font-semibold text-ink"></div>
+      <p class="mt-2.5 text-[15px] leading-[1.55] text-ink-soft">Déjanos tu nombre y lo marcaremos como reservado para que nadie más lo repita.</p>
+      <label class="mt-[18px] flex w-full flex-col gap-2 text-left">
+        <span class="label">Tu nombre</span>
+        <input id="reserve-name" type="text" autocomplete="name" placeholder="Ej: Tía Paula" class="field" />
+        <span id="reserve-err" role="alert" class="field-error"></span>
+      </label>
+      <button type="button" data-confirm class="btn-primary mt-[18px] w-full shadow-none">Confirmar reserva</button>
+      <button type="button" data-close class="mt-1.5 min-h-[46px] w-full text-sm font-extrabold text-sage-700">Cancelar</button>
+    </div>
+
+    <div data-step="done" hidden class="animate-fade-up flex flex-col items-center pt-1.5 pb-1">
+      <div class="font-display text-[26px] tracking-[.3em] text-gold">✦ ✦ ✦</div>
+      <div class="mt-2.5 font-display text-3xl leading-[1.15] font-semibold text-ink">¡Gracias, <span data-first></span>!</div>
+      <p class="mt-2 text-[17px] leading-[1.55] text-ink">{event.babyName} te lo agradecerá 💚</p>
+      <p class="mt-2 text-sm leading-[1.55] text-ink-soft">“<span data-gift-name></span>” quedó reservado a tu nombre.</p>
+      <button type="button" data-close class="btn-primary mt-5 w-full shadow-none">Volver a la lista</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { reserveGift } from '../lib/storage';
+
+  const modal = document.getElementById('reserve-modal')!;
+  const dialog = modal.querySelector<HTMLElement>('[role="dialog"]')!;
+  const input = document.getElementById('reserve-name') as HTMLInputElement;
+  const err = document.getElementById('reserve-err')!;
+  const stepForm = modal.querySelector<HTMLElement>('[data-step="form"]')!;
+  const stepDone = modal.querySelector<HTMLElement>('[data-step="done"]')!;
+  let giftId: string | null = null;
+  let lastFocus: HTMLElement | null = null;
+
+  const setError = (msg: string) => {
+    err.textContent = msg;
+    input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  };
+
+  function open(id: string, name: string) {
+    giftId = id;
+    lastFocus = document.activeElement as HTMLElement;
+    modal.querySelectorAll('[data-gift-name]').forEach((el) => (el.textContent = name));
+    input.value = '';
+    setError('');
+    stepForm.hidden = false;
+    stepDone.hidden = true;
+    modal.hidden = false;
+    // Reinicia la animación de entrada
+    dialog.classList.remove('animate-modal-in');
+    void dialog.offsetWidth;
+    dialog.classList.add('animate-modal-in');
+    setTimeout(() => input.focus(), 50);
+  }
+
+  function close() {
+    modal.hidden = true;
+    giftId = null;
+    lastFocus?.focus();
+  }
+
+  async function confirm() {
+    const name = input.value.trim();
+    if (!name) return setError('Escribe tu nombre para reservar 💚');
+    if (!giftId) return;
+    await reserveGift(Number(giftId), name);
+    modal.querySelector('[data-first]')!.textContent = name.split(/\s+/)[0];
+    stepForm.hidden = true;
+    stepDone.hidden = false;
+    document.dispatchEvent(new CustomEvent('gift:reserved', { detail: { id: giftId } }));
+  }
+
+  document.addEventListener('gift:open', (e) => {
+    const { id, name } = (e as CustomEvent).detail;
+    open(id, name);
+  });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal || (e.target as HTMLElement).closest('[data-close]')) close();
+  });
+  modal.querySelector('[data-confirm]')!.addEventListener('click', confirm);
+  input.addEventListener('input', () => setError(''));
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') confirm();
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) close();
+  });
+</script>

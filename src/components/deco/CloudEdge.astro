@@ -1,0 +1,9 @@
+---
+// Borde ondulado de nubes en la parte superior de una sección
+interface Props {
+  color: string;
+  offset?: number;
+}
+const { color, offset = 0 } = Astro.props;
+---
+<div aria-hidden="true" class="cloud-edge" style={{ '--edge': color, '--edge-offset': `${offset}px` }}></div>

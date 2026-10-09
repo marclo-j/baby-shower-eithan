@@ -1,0 +1,99 @@
+---
+import { event } from '../config/event';
+import Cloud from './deco/Cloud.astro';
+import Star from './deco/Star.astro';
+import Balloon from './deco/Balloon.astro';
+import Bunting from './deco/Bunting.astro';
+import Paw from './deco/Paw.astro';
+import Illustration from './deco/Illustration.astro';
+import Sticker from './deco/Sticker.astro';
+
+const words = [
+  { word: 'BABY', offset: 0 },
+  { word: 'SHOWER', offset: 4 },
+];
+---
+<section
+  id="inicio"
+  data-screen-label="01 Hero"
+  class="relative flex min-h-svh flex-col items-center justify-center bg-[linear-gradient(var(--color-sage-200)_0%,var(--color-sage-100)_60%)] px-5 pt-24 pb-[110px] text-center"
+>
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div class="absolute inset-x-0 top-0"><Bunting n={13} /></div>
+    <Cloud left={-70} top="24%" w={210} op={0.95} dur={30} />
+    <Cloud right={-80} top="14%" w={250} dur={24} delay={-8} />
+    <Cloud left="6%" bottom="10%" w={150} op={0.85} dur={20} />
+    <Cloud right={-30} bottom="24%" w={170} op={0.9} dur={34} />
+    <Star left="14%" top="18%" size={18} />
+    <Star right="16%" top="30%" size={14} delay={1.2} />
+    <Star left="20%" bottom="30%" size={12} color="var(--color-sage-500)" delay={0.6} />
+    <Star right="22%" bottom="14%" size={16} delay={2} />
+    <Sticker src="/img/hoja.png" size={110} left={-26} bottom="32%" rotate={20} op={0.85} dur={8} />
+    <Sticker src="/img/hoja.png" size={90} right={-20} top="44%" rotate={-140} op={0.8} dur={9} delay={-3} />
+    <Sticker src="/img/flor.png" size={38} left="10%" top="40%" dur={6} delay={-1} />
+    <Sticker src="/img/flor.png" size={30} right="9%" bottom="36%" rotate={30} dur={7} delay={-2} />
+  </div>
+
+  <div class="relative flex max-w-[720px] flex-col items-center">
+    <p class="mb-3.5 text-[13px] font-extrabold tracking-[.2em] text-sage-700 uppercase">Con mucho amor te invitamos al</p>
+    <h1
+      aria-label="Baby shower"
+      class="pl-[.14em] font-display text-[clamp(46px,14vw,88px)] leading-[.95] font-medium tracking-[.14em] text-sage-500"
+    >
+      {words.map(({ word, offset }) => (
+        <span aria-hidden="true" class="block">
+          {word.split('').map((ch, i) => (
+            <span class="hero-letter inline-block" style={{ '--d': `${(i + offset) * 60}ms` }}>{ch}</span>
+          ))}
+        </span>
+      ))}
+    </h1>
+    <div class="mt-0.5 min-h-[clamp(74px,20vw,130px)]">
+      <div class="hero-name px-[.25em] font-script text-[clamp(66px,19vw,124px)] leading-[1.15] text-sage-700">{event.babyName}</div>
+    </div>
+
+    <div class="relative mx-auto mt-[18px] aspect-square w-[clamp(230px,64vw,370px)]">
+      <div class="absolute -inset-3 rounded-full border-[1.5px] border-dashed border-sage-300"></div>
+      <div class="animate-bob absolute inset-0 rounded-full bg-cream shadow-[0_24px_50px_-26px_rgb(51_66_47/.45)]">
+        <Illustration src="/img/elefante.png" pad="14%" label="Elefantito bebé sonriendo" />
+      </div>
+      <Balloon left="-16%" top="-6%" color="var(--color-sage-300)" size={46} dur={6} />
+      <Balloon left="-2%" top="-20%" color="var(--color-sand)" size={38} dur={7} delay={-2} />
+      <Balloon right="-14%" top="2%" color="var(--color-sage-200)" size={42} dur={6.5} delay={-1} />
+      <Balloon right="2%" top="-18%" color="var(--color-sage-300)" size={32} dur={7.5} delay={-3} />
+      <Cloud left="-20%" bottom="-10%" w="62%" z={2} dur={16} />
+      <Cloud right="-18%" bottom="-4%" w="48%" z={2} dur={19} delay={-5} />
+    </div>
+
+    <p class="mt-[34px] font-display text-[clamp(20px,5vw,26px)] tracking-[.12em] text-ink">
+      {event.weekday} {event.day} · {event.month} · {event.year}
+    </p>
+    <a href="#mensaje" aria-label="Bajar a la invitación" class="mt-[26px] flex flex-col items-center gap-2 text-sage-700 no-underline">
+      <div class="flex flex-col items-center gap-1">
+        {[0, 1, 2].map((i) => (
+          <Paw
+            size={16}
+            color="var(--color-sage-500)"
+            class="animate-paw-step"
+            style={{ transform: `translateX(${i % 2 ? 7 : -7}px)`, animationDelay: `${i * 0.35}s` }}
+          />
+        ))}
+      </div>
+      <span class="text-[11px] font-extrabold tracking-[.22em] uppercase">Desliza</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  /* Las letras y el nombre esperan a que se abra el sobre */
+  :global(html:not(.invite-open)) .hero-letter,
+  :global(html:not(.invite-open)) .hero-name {
+    opacity: 0;
+  }
+  :global(html.invite-open) .hero-letter {
+    animation: letterIn 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d) both;
+  }
+  :global(html.invite-open) .hero-name {
+    animation: drawName 1.8s ease-in-out 0.8s both;
+  }
+</style>

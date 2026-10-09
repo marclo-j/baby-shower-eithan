@@ -1,0 +1,136 @@
+---
+import { event } from '../config/event';
+import CloudEdge from './deco/CloudEdge.astro';
+import Cloud from './deco/Cloud.astro';
+import Star from './deco/Star.astro';
+import Illustration from './deco/Illustration.astro';
+---
+<section id="confirmar" data-screen-label="07 Confirmar" class="relative bg-sage-300 px-[18px] pt-[90px] pb-[110px] text-center">
+  <CloudEdge color="var(--color-sage-300)" offset={20} />
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+    <Cloud left={-60} top={40} w={190} op={0.55} dur={28} />
+    <Cloud right={-60} top="45%" w={220} op={0.5} dur={24} delay={-9} />
+    <Star left="10%" top="22%" size={16} color="var(--color-cream)" />
+    <Star right="12%" top={120} size={12} color="var(--color-cream)" delay={1.4} />
+  </div>
+
+  <div class="relative mx-auto flex max-w-[560px] flex-col items-center">
+    <div data-reveal class="h-[120px] w-[120px] rounded-full bg-cream shadow-[0_0_0_8px_rgb(255_253_248/.45)]">
+      <Illustration src="/img/hipopotamo.png" pad="12%" label="Hipopótamo bebé" />
+    </div>
+    <div data-reveal class="mt-[18px] flex flex-col items-center">
+      <h2 class="pl-[.2em] font-display text-[clamp(34px,9vw,48px)] leading-none font-medium tracking-[.2em] text-ink">CONFIRMAR</h2>
+      <div class="-mt-0.5 font-script text-[clamp(52px,13vw,70px)] leading-[1.1] text-ink">Asistencia</div>
+    </div>
+    <p data-reveal class="mt-2 max-w-[440px] text-[17px] leading-[1.6] text-pretty text-ink">
+      Nos encantará saber que nos acompañarás. Por favor confirma antes del <b>{event.rsvpDeadline}</b>.
+    </p>
+
+    <div data-reveal class="mt-7 w-full rounded-[28px] bg-cream p-[clamp(22px,6vw,36px)] text-left shadow-lift">
+      <form id="rsvp-form" novalidate class="flex flex-col gap-5">
+        <label class="flex flex-col gap-2">
+          <span class="label">Nombre completo <span class="text-danger">*</span></span>
+          <input name="name" type="text" autocomplete="name" placeholder="Ej: Antonia Pérez" class="field" aria-describedby="err-name" />
+          <span id="err-name" role="alert" class="field-error"></span>
+        </label>
+
+        <label class="flex flex-col gap-2">
+          <span class="label">Teléfono o WhatsApp <span class="text-danger">*</span></span>
+          <input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+51 987 654 321" class="field" aria-describedby="err-phone" />
+          <span id="err-phone" role="alert" class="field-error"></span>
+        </label>
+
+        <button type="submit" class="rsvp-submit btn-primary min-h-14 w-full text-base">
+          <span class="rsvp-spinner hidden h-[18px] w-[18px] animate-spin-slow rounded-full border-[2.5px] border-cream/45 border-t-cream"></span>
+          <span class="rsvp-submit-label">Confirmar asistencia</span>
+        </button>
+      </form>
+
+      <div id="rsvp-done" hidden class="animate-fade-up flex flex-col items-center pt-2.5 pb-1 text-center">
+        <div class="rsvp-jump h-[150px] w-[150px] rounded-full bg-sage-100">
+          <Illustration src="/img/hipopotamo.png" pad="12%" label="Hipopótamo celebrando" />
+        </div>
+        <div class="mt-5 font-display text-[clamp(28px,7vw,36px)] leading-[1.15] font-semibold text-ink">¡Gracias por confirmar!</div>
+        <p id="rsvp-done-msg" class="mt-2.5 max-w-[380px] text-base leading-[1.6] text-ink-soft"></p>
+        <button type="button" id="rsvp-edit" class="mt-5 min-h-11 px-[18px] py-2.5 text-sm font-extrabold text-sage-700 underline">Editar mi respuesta</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .rsvp-submit.is-loading {
+    background: var(--color-sage-500);
+    color: var(--color-cream);
+    pointer-events: none;
+  }
+  .rsvp-jump.is-jumping {
+    animation: jump 1.2s ease-out 0.2s 2;
+  }
+</style>
+
+<script>
+  import { event } from '../config/event';
+  import { submitRsvp } from '../lib/storage';
+  import { confetti } from '../lib/motion';
+
+  type Key = 'name' | 'phone';
+
+  const form = document.getElementById('rsvp-form') as HTMLFormElement;
+  const done = document.getElementById('rsvp-done')!;
+  const doneMsg = document.getElementById('rsvp-done-msg')!;
+  const submit = form.querySelector<HTMLButtonElement>('.rsvp-submit')!;
+  const label = submit.querySelector('.rsvp-submit-label')!;
+  const spinner = submit.querySelector('.rsvp-spinner')!;
+  let loading = false;
+
+  const field = (name: Key) => form.elements.namedItem(name) as HTMLInputElement;
+
+  function setError(key: Key, msg: string) {
+    document.getElementById(`err-${key}`)!.textContent = msg;
+    field(key).setAttribute('aria-invalid', String(!!msg));
+  }
+
+  function setLoading(on: boolean) {
+    loading = on;
+    submit.classList.toggle('is-loading', on);
+    spinner.classList.toggle('hidden', !on);
+    label.textContent = on ? 'Enviando…' : 'Confirmar asistencia';
+  }
+
+  (['name', 'phone'] as const).forEach((k) => field(k).addEventListener('input', () => setError(k, '')));
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (loading) return;
+
+    const name = field('name').value.trim();
+    const phone = field('phone').value.trim();
+    let ok = true;
+    (['name', 'phone'] as const).forEach((k) => setError(k, ''));
+    if (!name) (setError('name', 'Cuéntanos tu nombre para saber quién viene 💚'), (ok = false));
+    else if (name.length < 3) (setError('name', 'Escribe tu nombre completo, por favor.'), (ok = false));
+    if (!phone) (setError('phone', 'Déjanos un teléfono para poder contactarte.'), (ok = false));
+    else if (!/^[+\d\s()-]{8,}$/.test(phone)) (setError('phone', 'Revisa el número; por ejemplo +51 987 654 321.'), (ok = false));
+    if (!ok) return;
+
+    setLoading(true);
+    await submitRsvp({ name, phone });
+    setLoading(false);
+
+    const first = name.split(/\s+/)[0];
+    doneMsg.textContent = `Te esperamos el ${event.dateLong}, ${first}. ¡Qué emoción compartir este día contigo!`;
+    form.hidden = true;
+    done.hidden = false;
+    const jumper = done.querySelector<HTMLElement>('.rsvp-jump')!;
+    jumper.classList.remove('is-jumping');
+    void jumper.offsetWidth;
+    jumper.classList.add('is-jumping');
+    confetti();
+  });
+
+  document.getElementById('rsvp-edit')!.addEventListener('click', () => {
+    done.hidden = true;
+    form.hidden = false;
+  });
+</script>

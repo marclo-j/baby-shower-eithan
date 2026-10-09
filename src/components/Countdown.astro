@@ -1,0 +1,102 @@
+---
+import { event, buildIcsHref } from '../config/event';
+import CloudEdge from './deco/CloudEdge.astro';
+import Cloud from './deco/Cloud.astro';
+import Star from './deco/Star.astro';
+
+const units = [
+  { key: 'd', label: 'Días' },
+  { key: 'h', label: 'Horas' },
+  { key: 'm', label: 'Min' },
+  { key: 's', label: 'Seg' },
+];
+const sideBox =
+  'border-y border-gold py-[9px] font-display text-[clamp(20px,5.4vw,26px)] tracking-[.06em] text-ink';
+---
+<section id="fecha" data-screen-label="03 Fecha" class="relative bg-sage-100 px-5 pt-[90px] pb-[100px] text-center">
+  <CloudEdge color="var(--color-sage-100)" offset={40} />
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+    <Cloud left={-50} top={60} w={150} op={0.8} dur={26} color="#FFFFFF" />
+    <Cloud right={-40} bottom={80} w={170} op={0.8} dur={22} delay={-7} color="#FFFFFF" />
+    <Star right="14%" top={110} size={14} delay={0.5} />
+  </div>
+
+  <div class="relative mx-auto flex max-w-[560px] flex-col items-center">
+    <h2 data-reveal class="font-display text-[clamp(28px,7vw,38px)] font-medium text-ink">Acompáñanos el día:</h2>
+    <div
+      data-reveal
+      data-reveal-delay="120"
+      class="mt-[22px] grid w-full max-w-[440px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-[clamp(12px,4vw,22px)]"
+    >
+      <div class={sideBox}>{event.weekday}</div>
+      <div class="font-display text-[clamp(64px,17vw,88px)] leading-none font-semibold text-sage-700">{event.day}</div>
+      <div class={sideBox}>{event.month}</div>
+    </div>
+    <div data-reveal data-reveal-delay="200" class="mt-2 pl-[.34em] font-display text-2xl tracking-[.34em] text-ink">{event.year}</div>
+
+    <div data-reveal class="mt-[52px] flex flex-col items-center">
+      <div class="font-script text-[clamp(44px,11vw,58px)] leading-[.9] text-sage-500">Cuenta</div>
+      <div class="pl-[.24em] font-display text-[clamp(24px,6.4vw,32px)] font-medium tracking-[.24em] text-ink">REGRESIVA</div>
+    </div>
+
+    <div id="countdown" data-target={event.dateISO} class="mt-[22px] grid w-full max-w-[480px] grid-cols-4 gap-[clamp(8px,2.6vw,16px)]">
+      {units.map((u, i) => (
+        <div
+          data-reveal
+          data-reveal-delay={i * 120}
+          class="flex flex-col items-center gap-1 rounded-[20px] bg-sage-200 px-1 pt-4 pb-3 shadow-[inset_0_0_0_1px_rgb(255_253_248/.7)]"
+        >
+          <div class="h-[clamp(40px,10vw,56px)] overflow-hidden font-display text-[clamp(36px,9.5vw,52px)] leading-[clamp(40px,10vw,56px)] font-semibold text-ink">
+            <span data-unit={u.key} class="inline-block">00</span>
+          </div>
+          <div class="text-[11px] font-extrabold tracking-[.12em] text-ink uppercase">{u.label}</div>
+        </div>
+      ))}
+    </div>
+
+    <a data-reveal href={buildIcsHref()} download="baby-shower.ics" class="btn-outline mt-[30px]">
+      <span aria-hidden="true" class="h-4 w-4 rounded border-[1.5px] border-t-4 border-current"></span>
+      Agregar al calendario
+    </a>
+  </div>
+</section>
+
+<script>
+  import { prefersReducedMotion } from '../lib/motion';
+
+  const root = document.getElementById('countdown');
+  if (root) {
+    const target = new Date(root.dataset.target!).getTime();
+    const els = {
+      d: root.querySelector<HTMLElement>('[data-unit="d"]')!,
+      h: root.querySelector<HTMLElement>('[data-unit="h"]')!,
+      m: root.querySelector<HTMLElement>('[data-unit="m"]')!,
+      s: root.querySelector<HTMLElement>('[data-unit="s"]')!,
+    };
+    const motion = !prefersReducedMotion();
+
+    const tick = () => {
+      const diff = Math.max(0, Math.floor((target - Date.now()) / 1000));
+      const parts = {
+        d: Math.floor(diff / 86400),
+        h: Math.floor((diff % 86400) / 3600),
+        m: Math.floor((diff % 3600) / 60),
+        s: diff % 60,
+      };
+      (Object.keys(parts) as (keyof typeof parts)[]).forEach((k) => {
+        const val = String(parts[k]).padStart(2, '0');
+        const el = els[k];
+        if (el.textContent === val) return;
+        el.textContent = val;
+        if (motion) {
+          // Reinicia la animación de entrada del dígito
+          el.classList.remove('animate-cd-slide');
+          void el.offsetWidth;
+          el.classList.add('animate-cd-slide');
+        }
+      });
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+</script>

@@ -1,0 +1,18 @@
+---
+interface Props {
+  top?: string | number;
+  left?: string | number;
+  right?: string | number;
+  bottom?: string | number;
+  size?: number;
+  color?: string;
+  delay?: number;
+}
+const { top, left, right, bottom, size = 16, color = 'var(--color-gold)', delay = 0 } = Astro.props;
+const px = (v?: string | number) => (typeof v === 'number' ? `${v}px` : v);
+---
+<span
+  aria-hidden="true"
+  class="animate-twinkle pointer-events-none absolute leading-none"
+  style={{ top: px(top), left: px(left), right: px(right), bottom: px(bottom), fontSize: `${size}px`, color, animationDelay: `${delay}s` }}
+>✦</span>

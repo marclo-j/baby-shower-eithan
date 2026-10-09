@@ -1,0 +1,40 @@
+---
+// Elemento decorativo en acuarela (hoja, flor...) posicionado de forma absoluta,
+// con una flotación suave opcional.
+interface Props {
+  src: string;
+  size: number;
+  top?: string | number;
+  left?: string | number;
+  right?: string | number;
+  bottom?: string | number;
+  rotate?: number;
+  op?: number;
+  dur?: number;
+  delay?: number;
+  float?: boolean;
+  z?: number;
+  class?: string;
+}
+const {
+  src, size, top, left, right, bottom, rotate = 0, op = 1, dur = 7, delay = 0, float = true, z, class: cls,
+} = Astro.props;
+const px = (v?: string | number) => (typeof v === 'number' ? `${v}px` : v);
+---
+<div
+  aria-hidden="true"
+  class:list={['pointer-events-none absolute', cls]}
+  style={{
+    top: px(top),
+    left: px(left),
+    right: px(right),
+    bottom: px(bottom),
+    width: `${size}px`,
+    height: `${size}px`,
+    opacity: op,
+    zIndex: z,
+    animation: float ? `floatY ${dur}s ease-in-out ${delay}s infinite` : undefined,
+  }}
+>
+  <img src={src} alt="" loading="lazy" decoding="async" class="h-full w-full object-contain" style={{ transform: `rotate(${rotate}deg)` }} />
+</div>

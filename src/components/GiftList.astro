@@ -1,0 +1,195 @@
+---
+import { event } from '../config/event';
+import { gifts, categories, formatPrice, giftUrl } from '../data/gifts';
+import CloudEdge from './deco/CloudEdge.astro';
+import Illustration from './deco/Illustration.astro';
+import ReserveModal from './ReserveModal.astro';
+
+const chips = [
+  { label: 'Todos', count: gifts.length },
+  ...categories.map((c) => ({ label: c, count: gifts.filter((g) => g.cat === c).length })),
+];
+---
+<section id="regalos" data-screen-label="05 Regalos" class="relative bg-sage-100 px-[18px] pb-[100px]">
+  <CloudEdge color="var(--color-sage-100)" offset={30} />
+  <div class="relative mx-auto flex max-w-[1080px] flex-col items-center text-center">
+    <!-- Monito colgando de su liana -->
+    <div class="animate-swing h-[150px] w-[150px] origin-top">
+      <Illustration src="/img/mono.png" label="Monito colgando de una liana" />
+    </div>
+
+    <div data-reveal class="mt-[22px] flex flex-col items-center">
+      <div class="pl-[.2em] font-display text-[clamp(28px,7vw,40px)] font-medium tracking-[.2em] text-ink">LISTA DE</div>
+      <h2 class="-mt-2 font-script text-[clamp(60px,16vw,88px)] leading-none font-normal text-sage-500">regalos</h2>
+    </div>
+    <p data-reveal class="mt-4 max-w-[520px] text-[17px] leading-[1.6] text-pretty text-ink-soft">
+      Tu presencia es nuestro mejor regalo, pero si quieres consentir a {event.babyName}, aquí tienes algunas ideas.
+    </p>
+    <p data-reveal class="mt-2.5 max-w-[520px] text-sm leading-[1.55] text-ink-soft">
+      Toca <b class="text-ink">“Lo regalo yo”</b> y quedará reservado a tu nombre para que no se repita.
+    </p>
+
+
+    <!-- Filtros -->
+    <div
+      role="tablist"
+      aria-label="Categorías"
+      class="mx-[-18px] mt-7 flex max-w-[calc(100%+36px)] gap-2 overflow-x-auto px-[18px] py-1 [justify-content:safe_center] [scrollbar-width:none]"
+    >
+      {chips.map((ch, i) => (
+        <button
+          type="button"
+          role="tab"
+          data-filter={ch.label}
+          aria-selected={i === 0 ? 'true' : 'false'}
+          class="gift-chip flex min-h-11 flex-none items-center gap-1.5 rounded-full border-[1.5px] px-4 py-2.5 text-sm font-extrabold whitespace-nowrap text-ink transition-[background,border-color] duration-350 ease-out"
+        >
+          {ch.label}<span class="text-xs font-bold text-ink-soft">{ch.count}</span>
+        </button>
+      ))}
+    </div>
+
+    <!-- Tarjetas -->
+    <div id="gift-grid" class="mt-[22px] grid w-full grid-cols-[repeat(auto-fill,minmax(min(100%,290px),1fr))] gap-5 text-left">
+      {gifts.map((g, i) => (
+        <article
+          data-reveal
+          data-reveal-delay={(i % 3) * 90}
+          data-gift-id={g.id}
+          data-cat={g.cat}
+          data-name={g.name}
+          data-reserved={g.reserved ? 'true' : 'false'}
+          data-preset={g.reserved ? 'true' : 'false'}
+          class="gift-card relative flex flex-col overflow-hidden rounded-3xl bg-cream shadow-card"
+        >
+          <div class="relative aspect-[4/3] bg-sage-200">
+            <div class="gift-dim absolute inset-0">
+              <Illustration shape="rect" src={g.img} label={`Foto: ${g.name.toLowerCase()}`} />
+            </div>
+            <span class="pointer-events-none absolute top-3 left-3 rounded-full bg-cream/95 px-2.5 py-[5px] text-[11px] font-extrabold tracking-[.1em] text-sage-700 uppercase">{g.cat}</span>
+            <div class="gift-stamp pointer-events-none absolute top-1/2 left-1/2 rounded-[14px] border-2 border-dashed border-gold bg-sand px-[18px] py-2.5 font-display text-[21px] font-semibold tracking-[.06em] whitespace-nowrap text-ink shadow-[0_10px_24px_-12px_rgb(51_66_47/.5)]">
+              Ya reservado ✓
+            </div>
+          </div>
+          <div class="flex flex-1 flex-col gap-2 px-5 pt-[18px] pb-5">
+            <div class="gift-dim flex flex-1 flex-col gap-1.5">
+              <h3 class="font-display text-[23px] leading-[1.15] font-semibold text-ink">{g.name}</h3>
+              <p class="text-[14.5px] leading-normal text-ink-soft">{g.desc}</p>
+              <div class="mt-1 flex items-center justify-between gap-2.5 text-sm">
+                <span class="font-extrabold text-ink">Ref. {formatPrice(g.price)}</span>
+                <a href={giftUrl(g)} target="_blank" rel="noopener" class="font-bold">Ver en tienda ↗</a>
+              </div>
+            </div>
+            <button type="button" data-reserve class="gift-reserve btn-primary mt-2 w-full shadow-none">Lo regalo yo 🎁</button>
+            <button
+              type="button"
+              disabled
+              class="gift-reserved mt-2 min-h-[50px] cursor-not-allowed rounded-full border-[1.5px] border-sage-200 bg-sage-100 text-[15px] font-extrabold text-ink-soft"
+            >Reservado</button>
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<ReserveModal />
+
+<style>
+  .gift-chip {
+    background: var(--color-cream);
+    border-color: var(--color-sage-200);
+  }
+  .gift-chip[aria-selected="true"] {
+    background: var(--color-sage-300);
+    border-color: var(--color-sage-500);
+  }
+
+  .gift-stamp {
+    display: none;
+    transform: translate(-50%, -50%) rotate(-8deg);
+  }
+  .gift-reserved {
+    display: none;
+  }
+  .gift-dim {
+    transition: opacity 0.4s ease-out;
+  }
+  .gift-card[data-reserved="true"] .gift-dim {
+    opacity: 0.55;
+  }
+  .gift-card[data-reserved="true"] .gift-stamp {
+    display: block;
+  }
+  .gift-card[data-reserved="true"] .gift-reserve {
+    display: none;
+  }
+  .gift-card[data-reserved="true"] .gift-reserved {
+    display: block;
+  }
+  .gift-card.just-reserved {
+    animation: giftPop 0.6s ease-out;
+  }
+  .gift-card.just-reserved .gift-stamp {
+    animation: stampIn 0.7s cubic-bezier(0.3, 1.5, 0.5, 1) 0.15s both;
+  }
+  .gift-card.refilter {
+    animation: fadeUp 0.5s ease-out var(--stagger, 0ms) both;
+  }
+</style>
+
+<script>
+  import { getReservations } from '../lib/storage';
+  import { prefersReducedMotion } from '../lib/motion';
+
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.gift-card'));
+  const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('.gift-chip'));
+  const motion = !prefersReducedMotion();
+
+  function markReserved(id: string, animate: boolean) {
+    const card = cards.find((c) => c.dataset.giftId === id);
+    if (!card) return;
+    card.dataset.reserved = 'true';
+    if (animate && motion) {
+      card.classList.remove('just-reserved');
+      void card.offsetWidth;
+      card.classList.add('just-reserved');
+    }
+  }
+
+  // Estado inicial: reservas guardadas
+  getReservations().then((saved) => {
+    Object.keys(saved).forEach((id) => markReserved(id, false));
+  });
+
+  // Filtros por categoría
+  chips.forEach((chip) =>
+    chip.addEventListener('click', () => {
+      const f = chip.dataset.filter;
+      chips.forEach((c) => c.setAttribute('aria-selected', String(c === chip)));
+      let i = 0;
+      cards.forEach((card) => {
+        const show = f === 'Todos' || card.dataset.cat === f;
+        card.hidden = !show;
+        card.classList.remove('refilter', 'just-reserved');
+        if (show && motion) {
+          card.classList.add('is-visible');
+          card.style.setProperty('--stagger', `${(i++ % 3) * 90}ms`);
+          void card.offsetWidth;
+          card.classList.add('refilter');
+        }
+      });
+    }),
+  );
+
+  // Abrir el modal de reserva
+  cards.forEach((card) =>
+    card.querySelector('[data-reserve]')?.addEventListener('click', () => {
+      document.dispatchEvent(
+        new CustomEvent('gift:open', { detail: { id: card.dataset.giftId, name: card.dataset.name } }),
+      );
+    }),
+  );
+  document.addEventListener('gift:reserved', (e) => markReserved((e as CustomEvent).detail.id, true));
+</script>

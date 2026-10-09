@@ -1,0 +1,58 @@
+---
+import { event } from '../config/event';
+import CloudEdge from './deco/CloudEdge.astro';
+import Cloud from './deco/Cloud.astro';
+import Star from './deco/Star.astro';
+import Bunting from './deco/Bunting.astro';
+import Illustration from './deco/Illustration.astro';
+import Sticker from './deco/Sticker.astro';
+
+// Escena final: los animalitos juntos (posiciones en % del contenedor)
+const animals = [
+  { src: '/img/jirafa.png', label: 'Jirafita', left: '0%', w: '26%', z: 2, delay: '0s' },
+  { src: '/img/leon.png', label: 'Leoncito', left: '16%', w: '22%', z: 3, delay: '-1.5s' },
+  { src: '/img/elefante.png', label: 'Elefantito', left: '33%', w: '27%', z: 5, delay: '-3s' },
+  { src: '/img/hipopotamo.png', label: 'Hipopótamo', left: '54%', w: '21%', z: 4, delay: '-2.5s' },
+  { src: '/img/koala.png', label: 'Koala', left: '68%', w: '18%', z: 3, delay: '-2s' },
+  { src: '/img/tigre.png', label: 'Tigrecito', left: '80%', w: '20%', z: 4, delay: '-4s' },
+];
+---
+<footer data-screen-label="08 Cierre" class="relative bg-cream px-5 pt-20 pb-[130px] text-center">
+  <CloudEdge color="var(--color-cream)" offset={60} />
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+    <Cloud left={-60} top="30%" w={200} op={0.9} dur={30} color="var(--color-sage-100)" />
+    <Cloud right={-70} top="12%" w={230} op={0.9} dur={24} delay={-6} color="var(--color-sage-100)" />
+    <Star left="16%" top={70} size={14} />
+  </div>
+  <div class="relative mx-auto flex max-w-[680px] flex-col items-center">
+    <h2 data-reveal class="font-script text-[clamp(66px,17vw,112px)] leading-[1.1] font-normal text-sage-500">Te esperamos</h2>
+    <div
+      data-reveal
+      role="img"
+      aria-label="Jirafa, león, elefante, hipopótamo, koala, tigre y mono juntos sobre nubes"
+      class="relative mt-[18px] aspect-[16/10] w-full max-w-[620px] overflow-hidden rounded-[28px] bg-[linear-gradient(var(--color-sage-150),var(--color-sage-100))]"
+    >
+      <Sticker src="/img/hoja.png" size={120} left={-24} top={-18} rotate={160} float={false} op={0.9} />
+      <Sticker src="/img/hoja.png" size={100} right={-20} top={-10} rotate={-150} float={false} op={0.85} />
+      <div class="animate-swing absolute -top-[2%] left-[58%] z-[2] w-[22%] origin-top">
+        <Illustration src="/img/mono.png" label="Monito colgando" />
+      </div>
+      <Sticker src="/img/flor.png" size={34} left="30%" top="12%" dur={6} />
+      <Sticker src="/img/flor.png" size={26} right="30%" top="18%" rotate={40} dur={7} delay={-2} />
+      {animals.map((a) => (
+        <div class="absolute bottom-[10%]" style={{ left: a.left, width: a.w, zIndex: a.z }}>
+          <div class="animate-bob" style={{ animationDelay: a.delay }}>
+            <Illustration src={a.src} label={a.label} />
+          </div>
+        </div>
+      ))}
+      <Cloud left="-6%" bottom="-14%" w="44%" z={6} dur={18} />
+      <Cloud left="30%" bottom="-18%" w="46%" z={6} dur={22} delay={-6} />
+      <Cloud right="-8%" bottom="-14%" w="42%" z={6} dur={20} delay={-3} />
+    </div>
+    <div class="mt-[30px] w-full max-w-[420px]"><Bunting n={9} /></div>
+    <p data-reveal class="mt-2.5 font-display text-xl text-ink-soft italic">Con cariño,</p>
+    <p data-reveal class="font-script text-[clamp(42px,10vw,56px)] leading-[1.15] text-sage-700">{event.parents}</p>
+    <p class="mt-7 text-[13px] font-bold tracking-[.06em] text-ink-soft">para {event.babyName}</p>
+  </div>
+</footer>

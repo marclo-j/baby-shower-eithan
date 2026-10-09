@@ -1,0 +1,46 @@
+---
+import { event } from '../config/event';
+---
+<button
+  id="music-btn"
+  type="button"
+  aria-label="Reproducir música"
+  aria-pressed="false"
+  class="after-open fixed top-3.5 right-3.5 z-[70] flex h-[46px] w-[46px] items-center justify-center rounded-full border border-sage-300/60 bg-cream/90 shadow-[0_10px_24px_-12px_rgb(51_66_47/.45)] backdrop-blur-md transition-transform duration-400 ease-out hover:scale-106"
+>
+  <span class="music-note text-xl leading-none text-sage-700">♪</span>
+  <span class="music-eq hidden h-4 items-end gap-[3px]">
+    {[0, 1, 2].map((i) => (
+      <span
+        class="h-4 w-[3px] origin-bottom rounded-sm bg-sage-700"
+        style={{ animation: `eqBar ${0.6 + i * 0.15}s ease-in-out ${i * 0.1}s infinite alternate` }}
+      ></span>
+    ))}
+  </span>
+</button>
+<audio id="music" src={event.musicSrc} preload="none" loop></audio>
+
+<script>
+  const btn = document.getElementById('music-btn') as HTMLButtonElement | null;
+  const audio = document.getElementById('music') as HTMLAudioElement | null;
+
+  if (btn && audio) {
+    let on = false;
+    const render = () => {
+      btn.setAttribute('aria-pressed', String(on));
+      btn.setAttribute('aria-label', on ? 'Pausar música' : 'Reproducir música');
+      btn.querySelector('.music-note')?.classList.toggle('hidden', on);
+      btn.querySelector('.music-eq')?.classList.toggle('hidden', !on);
+      btn.querySelector('.music-eq')?.classList.toggle('flex', on);
+    };
+    const set = (play: boolean) => {
+      on = play;
+      // Si no hay archivo de música, el botón solo cambia de estado visual
+      if (play) audio.play().catch(() => {});
+      else audio.pause();
+      render();
+    };
+    btn.addEventListener('click', () => set(!on));
+    document.addEventListener('invite:music', (e) => set((e as CustomEvent).detail.play));
+  }
+</script>

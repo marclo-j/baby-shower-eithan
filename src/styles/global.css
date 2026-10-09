@@ -1,0 +1,350 @@
+@import "tailwindcss";
+
+/* ───────────── Design tokens (paleta verde salvia) ───────────── */
+@theme {
+  --color-sage-100: #f2f5ef; /* fondo general */
+  --color-sage-150: #e6ede3;
+  --color-sage-200: #d3dfcf; /* fondos secundarios, bordes */
+  --color-sage-250: #c3d2be; /* caras del sobre */
+  --color-sage-300: #aec0a8; /* primario: botones, sección RSVP */
+  --color-sage-350: #bccbb6;
+  --color-sage-400: #9bb095;
+  --color-sage-500: #7d9478; /* acentos, títulos */
+  --color-sage-700: #55694f; /* caligrafía, hover de botones, links */
+  --color-ink: #33422f; /* texto principal */
+  --color-ink-soft: #5b6a57; /* texto secundario */
+  --color-ink-muted: #8a9786; /* placeholders */
+  --color-field: #f8faf6; /* fondo de inputs */
+  --color-cream: #fffdf8; /* tarjetas */
+  --color-sand: #ece4d8; /* crema de los globos */
+  --color-beige: #dccbb7;
+  --color-gold: #c9a961; /* líneas finas, sello */
+  --color-gold-light: #fbf4df;
+  --color-danger: #b5566a;
+  --color-vine: #a7bf9f;
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-script: "Great Vibes", cursive;
+  --font-body: "Nunito", system-ui, sans-serif;
+
+  --shadow-card: 0 2px 6px rgb(51 66 47 / 0.06), 0 18px 40px -22px rgb(51 66 47 / 0.32);
+  --shadow-soft: 0 2px 6px rgb(51 66 47 / 0.06), 0 22px 44px -24px rgb(51 66 47 / 0.35);
+  --shadow-lift: 0 2px 6px rgb(51 66 47 / 0.08), 0 30px 60px -28px rgb(51 66 47 / 0.5);
+  --shadow-btn: 0 10px 22px -12px rgb(85 105 79 / 0.7);
+
+  --ease-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  --animate-float-y: floatY 6s ease-in-out infinite;
+  --animate-bob: bob 6s ease-in-out infinite;
+  --animate-twinkle: twinkle 3.2s ease-in-out infinite;
+  --animate-sway: sway 3s ease-in-out infinite alternate;
+  --animate-swing: swing 2s ease-in-out infinite alternate;
+  --animate-seal-beat: sealBeat 2.4s ease-in-out infinite;
+  --animate-paw-step: pawStep 2s ease-in-out infinite;
+  --animate-fade-up: fadeUp 0.5s ease-out;
+  --animate-modal-in: modalIn 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  --animate-spin-slow: spin 0.8s linear infinite;
+  --animate-jump: jump 1.2s ease-out 0.2s 2;
+  --animate-gift-pop: giftPop 0.6s ease-out;
+  --animate-stamp-in: stampIn 0.7s cubic-bezier(0.3, 1.5, 0.5, 1) 0.15s both;
+  --animate-cd-slide: cdSlide 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* ───────────── Base ───────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background: var(--color-sage-100);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  a {
+    color: var(--color-sage-700);
+  }
+  a:hover {
+    color: var(--color-ink);
+  }
+  input,
+  textarea,
+  button,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+  ::placeholder {
+    color: var(--color-ink-muted);
+  }
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* ───────────── Componentes reutilizables ───────────── */
+@layer components {
+  /* Botón primario salvia */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 50px;
+    padding: 13px 26px;
+    border: none;
+    border-radius: 999px;
+    background: var(--color-sage-300);
+    color: var(--color-ink);
+    font-weight: 800;
+    font-size: 15px;
+    text-decoration: none;
+    box-shadow: var(--shadow-btn);
+    transition:
+      background 0.4s ease-out,
+      color 0.4s ease-out,
+      transform 0.4s ease-out;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-sage-700);
+    color: var(--color-cream);
+    transform: scale(1.03);
+  }
+  .btn-primary:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  /* Botón contorno */
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 24px;
+    border-radius: 999px;
+    border: 1.5px solid var(--color-sage-700);
+    background: transparent;
+    color: var(--color-sage-700);
+    font-weight: 800;
+    font-size: 15px;
+    text-decoration: none;
+    transition:
+      background 0.4s ease-out,
+      color 0.4s ease-out,
+      transform 0.4s ease-out;
+  }
+  .btn-outline:hover {
+    background: var(--color-sage-700);
+    color: var(--color-cream);
+    transform: scale(1.03);
+  }
+
+  /* Inputs */
+  .field {
+    height: 52px;
+    padding: 0 16px;
+    border-radius: 14px;
+    border: 1.5px solid var(--color-sage-200);
+    background: var(--color-field);
+    font-size: 16px;
+    outline: none;
+    transition:
+      box-shadow 0.2s ease-out,
+      background 0.2s ease-out,
+      border-color 0.2s ease-out;
+  }
+  textarea.field {
+    height: auto;
+    padding: 14px 16px;
+    line-height: 1.5;
+    resize: vertical;
+  }
+  .field:focus {
+    box-shadow: 0 0 0 4px rgb(174 192 168 / 0.55);
+    background: #fff;
+    border-color: var(--color-sage-500);
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--color-danger);
+  }
+
+  .label {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--color-ink);
+  }
+  .label-hint {
+    font-weight: 600;
+    color: var(--color-ink-soft);
+  }
+
+  .field-error {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-danger);
+  }
+  .field-error::before {
+    content: "!";
+    flex: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-danger);
+    color: var(--color-cream);
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .field-error:empty {
+    display: none;
+  }
+
+  /* Eyebrow / etiquetas en mayúsculas */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-sage-700);
+  }
+
+  /* Borde ondulado de nubes en la parte superior de cada sección */
+  .cloud-edge {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -39px;
+    height: 40px;
+    pointer-events: none;
+    --edge: var(--color-sage-100);
+    --edge-offset: 0px;
+    background:
+      radial-gradient(circle at 50% 100%, var(--edge) 25px, transparent 26px) 0 100% / 50px 30px repeat-x,
+      radial-gradient(circle at 50% 100%, var(--edge) 36px, transparent 37px) var(--edge-offset) 100% / 88px 40px repeat-x;
+  }
+}
+
+/* ───────────── Reveal al hacer scroll ───────────── */
+.js-motion [data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.8s ease-out var(--reveal-delay, 0ms),
+    transform 0.8s var(--ease-soft) var(--reveal-delay, 0ms);
+}
+.js-motion [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ───────────── Keyframes (de la maqueta) ───────────── */
+@keyframes sealBeat {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  12% { transform: translate(-50%, -50%) scale(1.07); }
+  24% { transform: translate(-50%, -50%) scale(1); }
+  36% { transform: translate(-50%, -50%) scale(1.05); }
+}
+@keyframes cloudDrift {
+  from { transform: translateX(-18px); }
+  to { transform: translateX(22px); }
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+@keyframes letterIn {
+  from { opacity: 0; transform: translateY(18px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@keyframes drawName {
+  from { clip-path: inset(0 100% 0 0); opacity: 0.2; }
+  to { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pawStep {
+  0%, 100% { opacity: 0.15; }
+  40% { opacity: 1; }
+}
+@keyframes swing {
+  from { transform: rotate(-5deg); }
+  to { transform: rotate(5deg); }
+}
+@keyframes sway {
+  from { transform: rotate(-3deg); }
+  to { transform: rotate(3deg); }
+}
+@keyframes cdSlide {
+  from { transform: translateY(-70%); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes giftPop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.045); }
+  70% { transform: scale(0.99); }
+  100% { transform: scale(1); }
+}
+@keyframes stampIn {
+  0% { opacity: 0; transform: translate(-50%, -50%) rotate(-8deg) scale(1.7); }
+  60% { opacity: 1; transform: translate(-50%, -50%) rotate(-8deg) scale(0.92); }
+  100% { opacity: 1; transform: translate(-50%, -50%) rotate(-8deg) scale(1); }
+}
+@keyframes fall {
+  from { transform: translate(0, -12vh) rotate(0deg); }
+  to { transform: translate(var(--dx), 112vh) rotate(var(--rot)); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes jump {
+  0%, 100% { transform: translateY(0) scale(1); }
+  15% { transform: translateY(0) scale(1.06, 0.92); }
+  35% { transform: translateY(-26px) scale(0.96, 1.05); }
+  55% { transform: translateY(0) scale(1.04, 0.96); }
+  70% { transform: translateY(-10px); }
+  85% { transform: translateY(0); }
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes eqBar {
+  from { transform: scaleY(0.3); }
+  to { transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.2s !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Elementos que aparecen recién cuando se abre la invitación */
+html:not(.invite-open) .after-open {
+  display: none;
+}

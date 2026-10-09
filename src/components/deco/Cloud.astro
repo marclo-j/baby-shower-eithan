@@ -1,0 +1,35 @@
+---
+// Nube esponjosa hecha con CSS; se desplaza suavemente en horizontal.
+interface Props {
+  top?: string | number;
+  left?: string | number;
+  right?: string | number;
+  bottom?: string | number;
+  w: string | number;
+  op?: number;
+  dur?: number;
+  delay?: number;
+  color?: string;
+  z?: number;
+}
+const { top, left, right, bottom, w, op = 1, dur = 22, delay = 0, color = 'var(--color-cream)', z } = Astro.props;
+const px = (v?: string | number) => (typeof v === 'number' ? `${v}px` : v);
+---
+<div
+  aria-hidden="true"
+  class="pointer-events-none absolute aspect-[2/1]"
+  style={{
+    top: px(top),
+    left: px(left),
+    right: px(right),
+    bottom: px(bottom),
+    width: px(w),
+    opacity: op,
+    zIndex: z,
+    animation: `cloudDrift ${dur}s ease-in-out ${delay}s infinite alternate`,
+  }}
+>
+  <div class="absolute inset-x-0 bottom-0 h-[52%] rounded-full" style={{ background: color }}></div>
+  <div class="absolute bottom-[22%] left-[14%] aspect-square w-[40%] rounded-full" style={{ background: color }}></div>
+  <div class="absolute bottom-[14%] left-[40%] aspect-square w-[50%] rounded-full" style={{ background: color }}></div>
+</div>

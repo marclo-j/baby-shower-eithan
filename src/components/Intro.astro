@@ -1,0 +1,166 @@
+---
+import { event } from '../config/event';
+import Cloud from './deco/Cloud.astro';
+import Star from './deco/Star.astro';
+import Paw from './deco/Paw.astro';
+import Illustration from './deco/Illustration.astro';
+---
+<div id="intro" data-phase="closed" data-screen-label="00 Intro" class="intro fixed inset-0 z-[100] flex items-center justify-center overflow-hidden px-4 pt-11 pb-6">
+  <Cloud left={-40} top="5%" w={170} op={0.95} dur={22} />
+  <Cloud right={-50} top="16%" w={150} op={0.9} dur={28} delay={-6} />
+  <Cloud left={-40} bottom="9%" w={200} dur={26} />
+  <Cloud right={-50} bottom="3%" w={190} dur={19} delay={-4} />
+  <Star left="8%" top="30%" size={18} color="var(--color-cream)" />
+  <Star right="9%" top="42%" size={14} color="var(--color-cream)" delay={1} />
+  <Star left="12%" bottom="28%" size={12} color="var(--color-sage-500)" delay={2} />
+
+  <div class="relative flex h-[min(84svh,660px)] w-[min(88vw,390px)] flex-col items-center justify-evenly rounded-t-[200px] rounded-b-[22px] bg-cream px-[22px] pt-[58px] pb-[22px] text-center shadow-[0_2px_6px_rgb(51_66_47/.06),0_30px_60px_-28px_rgb(51_66_47/.45)]">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-[9px] rounded-t-[191px] rounded-b-[15px] border border-gold"></div>
+
+    <!-- Moño -->
+    <div aria-hidden="true" class="pointer-events-none absolute -top-[30px] left-1/2 h-[84px] w-[150px] -translate-x-1/2">
+      <div class="absolute top-2 left-2 h-10 w-[62px] -rotate-[16deg] rounded-[50%] border-2 border-sage-500 bg-sage-300"></div>
+      <div class="absolute top-2 right-2 h-10 w-[62px] rotate-[16deg] rounded-[50%] border-2 border-sage-500 bg-sage-300"></div>
+      <div class="absolute top-11 left-[52px] h-[42px] w-3 rotate-[22deg] rounded border-2 border-sage-500 bg-sage-300"></div>
+      <div class="absolute top-11 right-[52px] h-[42px] w-3 -rotate-[22deg] rounded border-2 border-sage-500 bg-sage-300"></div>
+      <div class="absolute top-4 left-[61px] h-[26px] w-7 rounded-[10px] border-2 border-sage-500 bg-sage-200"></div>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <div class="pl-[.14em] font-display text-[clamp(40px,12vw,58px)] leading-[.95] font-medium tracking-[.14em] text-sage-500">BABY</div>
+      <div class="pl-[.14em] font-display text-[clamp(40px,12vw,58px)] leading-[.95] font-medium tracking-[.14em] text-sage-500">SHOWER</div>
+      <div class="mt-1 font-script text-[clamp(46px,13vw,64px)] leading-[1.15] text-sage-700">{event.babyName}</div>
+    </div>
+
+    <div class="flex flex-col items-center gap-3.5">
+      <div
+        id="envelope"
+        role="button"
+        tabindex="0"
+        aria-label="Abrir la invitación"
+        class="envelope relative aspect-[1.55] w-[min(250px,64vw)] cursor-pointer outline-none [perspective:900px] focus-visible:ring-4 focus-visible:ring-sage-300/60 rounded-[10px]"
+      >
+        <div class="absolute inset-0 rounded-[10px] bg-sage-400 shadow-[0_16px_30px_-14px_rgb(51_66_47/.5)]"></div>
+        <div class="env-card absolute top-[6%] right-[7%] left-[7%] z-[2] flex h-[88%] flex-col items-center rounded-md bg-cream pt-2.5">
+          <div class="font-script text-[28px] leading-none text-sage-700">{event.babyName}</div>
+          <div class="mt-1 font-display text-[13px] tracking-[.24em] text-ink">{event.dateShort}</div>
+        </div>
+        <div class="absolute inset-0 z-[3] rounded-[10px] bg-sage-300 [clip-path:polygon(0_0,50%_54%,100%_0,100%_100%,0_100%)]"></div>
+        <div class="absolute inset-0 z-[3] rounded-[10px] bg-sage-350 [clip-path:polygon(0_0,46%_56%,0_100%)]"></div>
+        <div class="absolute inset-0 z-[3] rounded-[10px] bg-sage-350 [clip-path:polygon(100%_0,54%_56%,100%_100%)]"></div>
+        <div class="env-flap absolute inset-x-0 top-0 h-[58%] origin-top rounded-t-[10px] bg-sage-250 [clip-path:polygon(0_0,100%_0,50%_100%)]"></div>
+        <div class="env-seal absolute top-[58%] left-1/2 z-[6] flex h-[62px] w-[62px] items-center justify-center rounded-full bg-[radial-gradient(circle_at_34%_30%,#E6CF94,#C9A961_55%,#A3853F)] shadow-[0_4px_10px_rgb(51_66_47/.35),inset_0_0_0_4px_rgb(255_255_255/.18)]">
+          <Paw size={30} color="#8C6F31" />
+        </div>
+      </div>
+      <div class="eyebrow">Toca para abrir la invitación</div>
+    </div>
+
+    <div class="flex w-full items-end justify-between gap-3">
+      <div class="h-[min(118px,30vw)] w-[min(96px,24vw)]"><Illustration src="/img/jirafa.png" label="Jirafita" /></div>
+      <div class="pb-2.5 font-display text-base tracking-[.2em] text-gold">✦ ✦ ✦</div>
+      <div class="h-[min(118px,30vw)] w-[min(96px,24vw)]"><Illustration src="/img/elefante.png" label="Elefantito" /></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .intro {
+    background-color: var(--color-sage-200);
+    background-image:
+      radial-gradient(circle at 12px 12px, rgb(125 148 120 / 0.3) 2px, transparent 2.6px),
+      radial-gradient(circle at 38px 40px, rgb(255 253 248 / 0.85) 3px, transparent 3.6px);
+    background-size: 52px 56px;
+    transition:
+      opacity 0.7s ease-out,
+      transform 0.9s ease-out;
+  }
+  .env-card {
+    transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .env-flap {
+    z-index: 4;
+    transition: transform 0.75s cubic-bezier(0.4, 0.1, 0.2, 1);
+  }
+  .env-seal {
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease-out;
+    animation: sealBeat 2.4s ease-in-out infinite;
+  }
+
+  .intro:not([data-phase="closed"]) .env-flap {
+    transform: rotateX(180deg);
+  }
+  .intro:not([data-phase="closed"]) .env-seal {
+    opacity: 0;
+    animation: none;
+  }
+  .intro[data-phase="card"] .env-flap,
+  .intro[data-phase="fading"] .env-flap {
+    z-index: 1;
+  }
+  .intro[data-phase="card"] .env-card,
+  .intro[data-phase="fading"] .env-card {
+    transform: translateY(-62%);
+  }
+  /* Solo con movimiento reducido: fade simple en lugar de las hojas */
+  .intro[data-phase="fading"] {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+</style>
+
+<script>
+  import { prefersReducedMotion } from '../lib/motion';
+  import { playLeafTransition, LEAF_SRC } from '../lib/leaves';
+
+  const intro = document.getElementById('intro');
+  const envelope = document.getElementById('envelope');
+
+  if (intro && envelope) {
+    document.documentElement.style.overflow = 'hidden';
+    const reduced = prefersReducedMotion();
+    const setPhase = (p: string) => (intro.dataset.phase = p);
+    // Precarga la hoja para que la transición no espere a la descarga
+    if (!reduced) new Image().src = LEAF_SRC;
+
+    const revealPage = () => {
+      intro.remove();
+      document.documentElement.style.overflow = '';
+      window.scrollTo(0, 0);
+    };
+    const startHero = () => {
+      document.documentElement.classList.add('invite-open');
+      document.dispatchEvent(new CustomEvent('invite:open'));
+    };
+
+    const open = () => {
+      if (intro.dataset.phase !== 'closed') return;
+      setPhase('opening');
+      // La música se inicia en el mismo gesto del usuario (requisito de los navegadores)
+      document.dispatchEvent(new CustomEvent('invite:music', { detail: { play: true } }));
+
+      if (reduced) {
+        setTimeout(() => setPhase('card'), 190);
+        setTimeout(() => setPhase('fading'), 440);
+        setTimeout(() => (revealPage(), startHero()), 610);
+        return;
+      }
+
+      setTimeout(() => setPhase('card'), 750);
+      // Cuando la tarjeta terminó de subir, las hojas cubren la pantalla,
+      // se mantienen 1.5 s y se despejan hacia los lados.
+      setTimeout(() => {
+        playLeafTransition({ onCovered: revealPage, onClearing: startHero, holdMs: 1500 });
+      }, 1750);
+    };
+
+    envelope.addEventListener('click', open);
+    envelope.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        open();
+      }
+    });
+  }
+</script>

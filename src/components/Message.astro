@@ -1,0 +1,33 @@
+---
+import { event } from '../config/event';
+import CloudEdge from './deco/CloudEdge.astro';
+import Illustration from './deco/Illustration.astro';
+
+// Jirafas laterales: en móvil flanquean la firma; desde 640 px se centran verticalmente junto al texto.
+const giraffeBox =
+  'pointer-events-none absolute bottom-0 w-16 sm:top-1/2 sm:bottom-auto sm:w-[clamp(100px,16vw,170px)] sm:-translate-y-1/2';
+---
+<section id="mensaje" data-screen-label="02 Mensaje" class="relative bg-cream px-6 pt-[84px] pb-24">
+  <CloudEdge color="var(--color-cream)" offset={18} />
+  <div class="relative mx-auto max-w-[920px]">
+    <div class:list={[giraffeBox, '-left-3 sm:left-0']}>
+      <div class="animate-float-y">
+        <!-- La imagen mira a la izquierda: se refleja para que mire hacia el texto -->
+        <div class="-scale-x-100"><Illustration src="/img/jirafa.png" label="Jirafita" /></div>
+      </div>
+    </div>
+    <div class:list={[giraffeBox, '-right-3 sm:right-0']}>
+      <div class="animate-float-y [animation-delay:-3s]">
+        <Illustration src="/img/jirafa.png" label="Jirafita" />
+      </div>
+    </div>
+
+    <div data-reveal class="relative flex flex-col items-center text-center sm:px-[clamp(100px,16vw,170px)]">
+      <div class="font-display text-lg tracking-[.4em] text-gold">✦ ✦ ✦</div>
+      <p class="mt-[22px] max-w-[540px] font-display text-[clamp(23px,5.6vw,30px)] leading-[1.45] font-medium text-pretty text-ink italic">
+        Muy pronto llegará a nuestras vidas un pequeño gran aventurero. Queremos compartir contigo la alegría de esperarlo.
+      </p>
+      <p class="mt-[26px] font-script text-[clamp(40px,10vw,54px)] leading-[1.1] text-sage-700">{event.parents}</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+---
+import { event, mapsHref, wazeHref } from '../config/event';
+import CloudEdge from './deco/CloudEdge.astro';
+import Illustration from './deco/Illustration.astro';
+---
+<section id="lugar" data-screen-label="04 Lugar" class="relative bg-sage-200 px-5 pt-[90px] pb-24 text-center">
+  <CloudEdge color="var(--color-sage-200)" offset={10} />
+  <div class="relative mx-auto flex max-w-[480px] flex-col items-center">
+    <div data-reveal class="flex flex-col items-center">
+      <div aria-hidden="true" class="flex h-[34px] w-[34px] -rotate-45 items-center justify-center rounded-[50%_50%_50%_0] bg-sage-500">
+        <div class="h-3 w-3 rounded-full bg-cream"></div>
+      </div>
+      <h2 class="mt-1.5 font-script text-[clamp(56px,14vw,76px)] leading-[1.05] font-normal text-ink">Lugar</h2>
+    </div>
+
+    <div data-reveal data-reveal-delay="120" class="mt-3.5 flex w-full flex-col items-center rounded-[28px] bg-cream px-6 pt-[30px] pb-7 shadow-soft">
+      <div class="font-display text-[clamp(24px,6vw,30px)] leading-[1.2] font-semibold text-ink">{event.venue.name}</div>
+      <div class="mt-2 text-base leading-[1.55] text-ink-soft">{event.venue.address}<br />{event.venue.city}</div>
+      <div class="my-5 h-px w-[60px] bg-gold"></div>
+      <div class="font-display text-[34px] leading-none font-medium text-sage-700">{event.time}</div>
+      <div class="mt-1.5 text-sm text-ink-soft">{event.weekday} {event.day} de {event.month.toLowerCase()}</div>
+      <div class="mt-6 flex flex-wrap justify-center gap-2.5">
+        <a href={mapsHref} target="_blank" rel="noopener" class="btn-primary">Cómo llegar</a>
+        <a
+          href={wazeHref}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex min-h-[50px] items-center rounded-full px-5 py-[13px] text-[15px] font-extrabold text-sage-700 no-underline transition-colors duration-400 ease-out hover:bg-sage-100"
+        >Abrir en Waze</a>
+      </div>
+    </div>
+
+    <div
+      data-reveal
+      data-reveal-delay="200"
+      class="mt-7 h-[150px] w-[150px] rounded-full bg-cream shadow-[0_0_0_8px_rgb(255_253_248/.55)]"
+    >
+      <div class="animate-sway h-full w-full origin-bottom">
+        <Illustration src="/img/leon.png" pad="12%" label="Leoncito bebé" />
+      </div>
+    </div>
+  </div>
+</section>
