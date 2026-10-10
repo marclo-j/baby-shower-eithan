@@ -7,14 +7,14 @@ import Bunting from './deco/Bunting.astro';
 import Illustration from './deco/Illustration.astro';
 import Sticker from './deco/Sticker.astro';
 
-// Escena final: los animalitos juntos (posiciones en % del contenedor)
-const animals = [
-  { src: '/img/jirafa.png', label: 'Jirafita', left: '0%', w: '26%', z: 2, delay: '0s' },
-  { src: '/img/leon.png', label: 'Leoncito', left: '16%', w: '22%', z: 3, delay: '-1.5s' },
-  { src: '/img/elefante.png', label: 'Elefantito', left: '33%', w: '27%', z: 5, delay: '-3s' },
-  { src: '/img/hipopotamo.png', label: 'Hipopótamo', left: '54%', w: '21%', z: 4, delay: '-2.5s' },
-  { src: '/img/koala.png', label: 'Koala', left: '68%', w: '18%', z: 3, delay: '-2s' },
-  { src: '/img/tigre.png', label: 'Tigrecito', left: '80%', w: '20%', z: 4, delay: '-4s' },
+// Escena final: los dinos juntos (posiciones en % del contenedor).
+// `flip` refleja la imagen para que los de la derecha miren hacia el centro.
+const dinos = [
+  { src: '/img/dino-estego.png', label: 'Estegosaurio', left: '1%', w: '30%', z: 3, delay: '0s' },
+  { src: '/img/dino-para.png', label: 'Parasaurolophus', left: '19%', w: '24%', z: 4, delay: '-1.5s' },
+  { src: '/img/dino-rex.png', label: 'T-rex verde', left: '36%', w: '28%', z: 5, delay: '-3s' },
+  { src: '/img/dino-naranja.png', label: 'T-rex naranja', left: '57%', w: '24%', z: 4, delay: '-2.5s', flip: true },
+  { src: '/img/dino-braquio.png', label: 'Braquiosaurio', left: '72%', w: '30%', z: 3, delay: '-2s', flip: true },
 ];
 ---
 <footer data-screen-label="08 Cierre" class="relative bg-cream px-5 pt-20 pb-[130px] text-center">
@@ -29,20 +29,17 @@ const animals = [
     <div
       data-reveal
       role="img"
-      aria-label="Jirafa, león, elefante, hipopótamo, koala, tigre y mono juntos sobre nubes"
+      aria-label="Estegosaurio, parasaurolophus, T-rex verde, T-rex naranja y braquiosaurio juntos sobre nubes"
       class="relative mt-[18px] aspect-[16/10] w-full max-w-[620px] overflow-hidden rounded-[28px] bg-[linear-gradient(var(--color-sage-150),var(--color-sage-100))]"
     >
-      <Sticker src="/img/hoja.png" size={120} left={-24} top={-18} rotate={160} float={false} op={0.9} />
-      <Sticker src="/img/hoja.png" size={100} right={-20} top={-10} rotate={-150} float={false} op={0.85} />
-      <div class="animate-swing absolute -top-[2%] left-[58%] z-[2] w-[22%] origin-top">
-        <Illustration src="/img/mono.png" label="Monito colgando" />
-      </div>
+      <Sticker src="/img/helecho.png" size={120} left={-24} top={-18} rotate={160} float={false} op={0.9} />
+      <Sticker src="/img/helecho.png" size={100} right={-20} top={-10} rotate={-150} float={false} op={0.85} />
       <Sticker src="/img/flor.png" size={34} left="30%" top="12%" dur={6} />
       <Sticker src="/img/flor.png" size={26} right="30%" top="18%" rotate={40} dur={7} delay={-2} />
-      {animals.map((a) => (
-        <div class="absolute bottom-[10%]" style={{ left: a.left, width: a.w, zIndex: a.z }}>
-          <div class="animate-bob" style={{ animationDelay: a.delay }}>
-            <Illustration src={a.src} label={a.label} />
+      {dinos.map((d) => (
+        <div class="absolute bottom-[10%]" style={{ left: d.left, width: d.w, zIndex: d.z }}>
+          <div class="animate-bob" style={{ animationDelay: d.delay }}>
+            <div class:list={[d.flip && '-scale-x-100']}><Illustration src={d.src} label={d.label} /></div>
           </div>
         </div>
       ))}

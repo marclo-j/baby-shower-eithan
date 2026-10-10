@@ -3,7 +3,7 @@ import { event } from '../config/event';
 import CloudEdge from './deco/CloudEdge.astro';
 import Illustration from './deco/Illustration.astro';
 
-// Jirafas laterales: en móvil flanquean la firma; desde 640 px se centran verticalmente junto al texto.
+// Dinos de cuello largo laterales: en móvil flanquean la firma; desde 640 px se centran verticalmente junto al texto.
 const giraffeBox =
   'pointer-events-none absolute bottom-0 w-16 sm:top-1/2 sm:bottom-auto sm:w-[clamp(100px,16vw,170px)] sm:-translate-y-1/2';
 ---
@@ -12,13 +12,13 @@ const giraffeBox =
   <div class="relative mx-auto max-w-[920px]">
     <div class:list={[giraffeBox, '-left-3 sm:left-0']}>
       <div class="animate-float-y">
-        <!-- La imagen mira a la izquierda: se refleja para que mire hacia el texto -->
-        <div class="-scale-x-100"><Illustration src="/img/jirafa.png" label="Jirafita" /></div>
+        <Illustration src="/img/dino-braquio.png" label="Dinosaurio de cuello largo" />
       </div>
     </div>
     <div class:list={[giraffeBox, '-right-3 sm:right-0']}>
       <div class="animate-float-y [animation-delay:-3s]">
-        <Illustration src="/img/jirafa.png" label="Jirafita" />
+        <!-- La imagen mira a la derecha: se refleja para que mire hacia el texto -->
+        <div class="-scale-x-100"><Illustration src="/img/dino-braquio.png" label="Dinosaurio de cuello largo" /></div>
       </div>
     </div>
 

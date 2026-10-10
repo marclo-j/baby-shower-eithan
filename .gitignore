@@ -3,3 +3,6 @@ dist/
 .astro/
 .env
 .DS_Store
+
+# Material de trabajo (capturas de referencia y videos originales), no se publica
+recursos/new_resources/

@@ -4,14 +4,15 @@ Acuarelas PNG con fondo transparente usadas en el sitio:
 
 | Archivo | Dónde se usa |
 |---|---|
-| elefante.png | Intro, portada (hero), escena final |
-| jirafa.png | Intro, jirafa que se asoma en el mensaje, escena final |
-| leon.png | Sección Lugar, escena final |
-| tigre.png | Escena final |
-| mono.png | Colgando de su liana en la Lista de regalos, escena final |
-| koala.png | Escena final |
-| hipopotamo.png | Confirmar asistencia (encabezado y mensaje de éxito), escena final |
-| hoja.png, flor.png | Decoración (portada y escena final) |
+| dino-rex.png | Portada (hero), mensaje de éxito al confirmar, escena final. Es el dino que nace del huevo |
+| dino-para.png | Intro, encabezado de Confirmar asistencia, escena final |
+| dino-naranja.png | Intro, sección Lugar, escena final |
+| dino-braquio.png | Los dos que se asoman en el mensaje, escena final |
+| dino-estego.png | Lista de regalos, escena final |
+| helecho.png | Transición de hojas al abrir la invitación y decoración (portada y escena final) |
+| flor.png | Decoración (portada y escena final) |
+
+El huevo animado del intro está en `public/video/`: `huevo.webm` y `huevo.mp4` (el video), `huevo-inicio.webp` (póster) y `huevo-final.webp` (se usa con movimiento reducido).
 
 Para cambiar una ilustración, reemplaza el archivo manteniendo el nombre.
 Las fotos de los regalos se agregan con `img: '/img/archivo.png'` en `src/data/gifts.ts`.

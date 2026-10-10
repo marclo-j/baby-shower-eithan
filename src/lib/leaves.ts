@@ -1,9 +1,9 @@
-// Transición de hojas después de abrir el sobre:
+// Transición de hojas después de que nace el dino del huevo:
 // 1) las hojas cubren la pantalla de forma progresiva,
 // 2) se mantienen un momento,
 // 3) se retiran hacia los lados como niebla que se despeja.
 
-export const LEAF_SRC = '/img/hoja.png';
+export const LEAF_SRC = '/img/helecho.png';
 
 type Options = {
   /** Se llama cuando la pantalla quedó completamente cubierta. */
