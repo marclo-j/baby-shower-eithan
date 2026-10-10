@@ -51,8 +51,9 @@ import Illustration from './deco/Illustration.astro';
           disablepictureinpicture
           aria-hidden="true"
         >
-          <source src="/video/huevo.webm" type="video/webm" />
+          <!-- MP4 primero: Safari en iOS puede elegir el WebM y no reproducirlo -->
           <source src="/video/huevo.mp4" type="video/mp4" />
+          <source src="/video/huevo.webm" type="video/webm" />
         </video>
       </div>
       <div class="egg-hint eyebrow">Toca el huevito para abrir</div>
@@ -159,6 +160,8 @@ import Illustration from './deco/Illustration.astro';
       // Respaldo por si el video no puede reproducirse o no dispara "ended".
       video.addEventListener('ended', startLeaves, { once: true });
       const fallback = setTimeout(startLeaves, 9500);
+      // iOS solo permite reproducir sin interacción extra si el video está silenciado
+      video.muted = true;
       video.play().catch(() => {
         clearTimeout(fallback);
         startLeaves();
