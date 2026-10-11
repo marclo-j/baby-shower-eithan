@@ -1,0 +1,322 @@
+[
+  {
+    "id": 1,
+    "cat": "Paseo",
+    "name": "Arnés caminador 2 en 1",
+    "desc": "Arnés caminador 2 en 1 Maternelle para bebé. Acolchado y ajustable, acompaña sus primeros pasos con mayor…",
+    "price": 159.9,
+    "reserved": false,
+    "url": "https://www.maternelle.pe/products/arnes-caminador-2-en-1-maternelle?variant=54511566356798",
+    "img": "/img/regalos/1-arnes-caminador-2-en-1.jpg"
+  },
+  {
+    "id": 2,
+    "cat": "Alimentación",
+    "name": "Set Alimentación de Silicona Infanti",
+    "desc": "",
+    "price": 129.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/prod18581033/Set-Alimentacion-De-Silicona-Infanti/21207565",
+    "img": "/img/regalos/2-set-alimentacion-de-silicona-infanti.jpg"
+  },
+  {
+    "id": 3,
+    "cat": "Habitación",
+    "name": "Manta Pack x2 Bebé Niña Algodón Carters",
+    "desc": "",
+    "price": 89.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/21407531/manta-pack-x2-bebe-nina-algodon-carters/21407532",
+    "img": "/img/regalos/3-manta-pack-x2-bebe-nina-algodon-carters.jpg"
+  },
+  {
+    "id": 4,
+    "cat": "Higiene y baño",
+    "name": "Toallas Carters pack x2",
+    "desc": "",
+    "price": 89.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/21500934/toalla-bebe-nino-pack-x2-algodon-carters/21500935",
+    "img": "/img/regalos/4-toallas-carters-pack-x2.webp"
+  },
+  {
+    "id": 5,
+    "cat": "Habitación",
+    "name": "Cuna colecho musical con mosquitero Yamp",
+    "desc": "",
+    "price": 399.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/883093297/cuna-colecho-bebe-golf-con-mosquitero-yamp/883093298",
+    "img": "/img/regalos/5-cuna-colecho-musical-con-mosquitero-yamp.jpg"
+  },
+  {
+    "id": 6,
+    "cat": "Habitación",
+    "name": "Colchón para cuna colecho Maternelle",
+    "desc": "",
+    "price": 179.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/18008813/colchon-cuna-colecho/18008813",
+    "img": "/img/regalos/6-colchon-para-cuna-colecho-maternelle.jpg"
+  },
+  {
+    "id": 7,
+    "cat": "Paseo",
+    "name": "Coche de paseo Terrain Infanti",
+    "desc": "",
+    "price": 449.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/21199625/coche-paseo-terrain-infanti/21199625",
+    "img": "/img/regalos/7-coche-de-paseo-terrain-infanti.jpg"
+  },
+  {
+    "id": 8,
+    "cat": "Ropa",
+    "name": "Conjunto 3 piezas Carters",
+    "desc": "",
+    "price": 109.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/21483455/conjunto-3-piezas-bebe-nino-algodon-carters/21483456",
+    "img": "/img/regalos/8-conjunto-3-piezas-carters.jpg"
+  },
+  {
+    "id": 9,
+    "cat": "Ropa",
+    "name": "Bata de algodón Carters",
+    "desc": "",
+    "price": 89.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/20993759/bata-algodon-carters/20993760",
+    "img": "/img/regalos/9-bata-de-algodon-carters.jpg"
+  },
+  {
+    "id": 10,
+    "cat": "Ropa",
+    "name": "Bodys manga corta Yamp pack x7",
+    "desc": "",
+    "price": 99.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/883876335/body-bebe-nino-pack-x7-manga-corta-algodon-yamp/883876337",
+    "img": "/img/regalos/10-bodys-manga-corta-yamp-pack-x7.jpg"
+  },
+  {
+    "id": 11,
+    "cat": "Ropa",
+    "name": "Bodys manga larga Yamp pack x7",
+    "desc": "",
+    "price": 99.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/883760725/body-bebe-nino-pack-x7-manga-larga-algodon-yamp/883760726",
+    "img": "/img/regalos/11-bodys-manga-larga-yamp-pack-x7.webp"
+  },
+  {
+    "id": 12,
+    "cat": "Higiene y baño",
+    "name": "Set cepillo y peine Suavinex",
+    "desc": "",
+    "price": 48.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/21283758/set-cepiilo-y-peine-wild-free-beige-suavinex/21283758",
+    "img": "/img/regalos/12-set-cepillo-y-peine-suavinex.jpg"
+  },
+  {
+    "id": 13,
+    "cat": "Habitación",
+    "name": "Monitor de bebé con cámara HD y WiFi",
+    "desc": "",
+    "price": 499,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/153555162/monitor-para-bebe-con-hd-camara-y-wifi-vision-nocturna-infrarroja-comunicacion-bidireccional/153555163",
+    "img": "/img/regalos/13-monitor-de-bebe-con-camara-hd-y-wifi.webp"
+  },
+  {
+    "id": 14,
+    "cat": "Alimentación",
+    "name": "Pack de lactancia premium gris",
+    "desc": "",
+    "price": 200,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/151940607/pack-de-lactancia-premium-i-color-gris/151940608",
+    "img": "/img/regalos/14-pack-de-lactancia-premium-gris.webp"
+  },
+  {
+    "id": 15,
+    "cat": "Higiene y baño",
+    "name": "Succionador nasal para bebé",
+    "desc": "",
+    "price": 59.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/115927217/Succionador-Nasal-Moquitos-para-Bebes-Aspirador-Mocos/115927218",
+    "img": "/img/regalos/15-succionador-nasal-para-bebe.jpg"
+  },
+  {
+    "id": 16,
+    "cat": "Habitación",
+    "name": "Sábanas de cuna juego de 3 piezas",
+    "desc": "",
+    "price": 199,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/142819635/Sabanas-de-cuna-Juego-3-piezas-Blanco-Nino/142819636",
+    "img": "/img/regalos/16-sabanas-de-cuna-juego-de-3-piezas.webp"
+  },
+  {
+    "id": 17,
+    "cat": "Habitación",
+    "name": "Sábanas bajeras para colecho pack x2",
+    "desc": "",
+    "price": 129,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/136289640/sabanas-bajeras-para-bebe-colecho-100-algodon-pack-x2/136289641",
+    "img": "/img/regalos/17-sabanas-bajeras-para-colecho-pack-x2.jpg"
+  },
+  {
+    "id": 18,
+    "cat": "Alimentación",
+    "name": "Extractor de leche portátil manos libres",
+    "desc": "",
+    "price": 239,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/142406113/Extractor-De-Leche-Portatil-Manos-Libres-S09/142406114",
+    "img": "/img/regalos/18-extractor-de-leche-portatil-manos-libres.jpg"
+  },
+  {
+    "id": 19,
+    "cat": "Higiene y baño",
+    "name": "Cambiador y bañera 2 en 1",
+    "desc": "",
+    "price": 499,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/126294392/Cambiador-Banera-2-en-1-Bebe-Multifuncional/126294393",
+    "img": "/img/regalos/19-cambiador-y-banera-2-en-1.webp"
+  },
+  {
+    "id": 20,
+    "cat": "Habitación",
+    "name": "Corral 3 en 1 con canasta y arco de fútbol",
+    "desc": "",
+    "price": 139,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/144214746/Corral-para-Bebes-3-en-1-con-Canasta-y-Arco-de-Futbol/144214747",
+    "img": "/img/regalos/20-corral-3-en-1-con-canasta-y-arco-de-futbol.webp"
+  },
+  {
+    "id": 21,
+    "cat": "Alimentación",
+    "name": "Bolsas para leche materna x30",
+    "desc": "",
+    "price": 49,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/133671290/Bolsas-para-Leche-Materna-30-unidades-250-mL-Hermetico/133671291",
+    "img": "/img/regalos/21-bolsas-para-leche-materna-x30.webp"
+  },
+  {
+    "id": 22,
+    "cat": "Alimentación",
+    "name": "Silla de comer balancín 3 en 1",
+    "desc": "",
+    "price": 299.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/143083196/SILLA-DE-COMER-BALANCIN-3-EN-1-BEIGE/143083197",
+    "img": "/img/regalos/22-silla-de-comer-balancin-3-en-1.webp"
+  },
+  {
+    "id": 23,
+    "cat": "Habitación",
+    "name": "Mecedora eléctrica Merly",
+    "desc": "",
+    "price": 1500,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/144631600/Mecedora-electrica-Merly-para-bebe-premium-white/144631601",
+    "img": "/img/regalos/23-mecedora-electrica-merly.webp"
+  },
+  {
+    "id": 24,
+    "cat": "Paseo",
+    "name": "Pañalera Porta Nixi",
+    "desc": "",
+    "price": 279.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/153774319/panalera-porta-nixi-gris-line/153774320",
+    "img": "/img/regalos/24-panalera-porta-nixi.jpg"
+  },
+  {
+    "id": 25,
+    "cat": "Alimentación",
+    "name": "Set Philips Avent 3 biberones anticólicos + escobilla",
+    "desc": "",
+    "price": 329.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/152519082/set-avent-anticolico-antigoteo-3-bbiberones-01-escobilla/152519083",
+    "img": "/img/regalos/25-set-philips-avent-3-biberones-anticolicos-escobill.jpg"
+  },
+  {
+    "id": 26,
+    "cat": "Juguetes",
+    "name": "Pelota sonajero sensorial con mordedores",
+    "desc": "",
+    "price": 99,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/152457463/pelota-sonajero-sensorial-para-bebe-con-mordedores-multi-texturas/152457464",
+    "img": "/img/regalos/26-pelota-sonajero-sensorial-con-mordedores.jpg"
+  },
+  {
+    "id": 27,
+    "cat": "Juguetes",
+    "name": "Andador caminador 3 en 1",
+    "desc": "",
+    "price": 139,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/157475283/andador-caminador-para-bebe-3-en-1-azul/157475286",
+    "img": "/img/regalos/27-andador-caminador-3-en-1.jpg"
+  },
+  {
+    "id": 28,
+    "cat": "Paseo",
+    "name": "Canguro portabebé ergonómico 3 en 1",
+    "desc": "",
+    "price": 130,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/157535770/canguro-portabebe-ergonomico-multifuncional-diseno-circulos-color-negro/157535771",
+    "img": "/img/regalos/28-canguro-portabebe-ergonomico-3-en-1.jpg"
+  },
+  {
+    "id": 29,
+    "cat": "Higiene y baño",
+    "name": "Lima eléctrica para uñas de bebé",
+    "desc": "",
+    "price": 79,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/146543268/Lima-Electrica-Para-Bebe-Pulidor-De-Unas/146543269",
+    "img": "/img/regalos/29-lima-electrica-para-unas-de-bebe.jpg"
+  },
+  {
+    "id": 30,
+    "cat": "Juguetes",
+    "name": "Rodillo de estimulación para gateo",
+    "desc": "",
+    "price": 120,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/132524505/Rodillo-Para-Estimulacion-Gateo-De-Bebe-Con-Sonajero-Unisex/132524506",
+    "img": "/img/regalos/30-rodillo-de-estimulacion-para-gateo.webp"
+  },
+  {
+    "id": 31,
+    "cat": "Higiene y baño",
+    "name": "Bañera plegable Priori Stand",
+    "desc": "",
+    "price": 349,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/156092923/banera-para-bebe-plegable-priori-stand-gris/156092924",
+    "img": "/img/regalos/31-banera-plegable-priori-stand.webp"
+  },
+  {
+    "id": 32,
+    "cat": "Higiene y baño",
+    "name": "Set de manicura para bebé",
+    "desc": "",
+    "price": 21.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/151258506/set-manicura-para-bebes-blanco/151258507",
+    "img": "/img/regalos/32-set-de-manicura-para-bebe.webp"
+  }
+]

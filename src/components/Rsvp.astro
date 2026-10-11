@@ -44,6 +44,7 @@ import Illustration from './deco/Illustration.astro';
           <span class="rsvp-spinner hidden h-[18px] w-[18px] animate-spin-slow rounded-full border-[2.5px] border-cream/45 border-t-cream"></span>
           <span class="rsvp-submit-label">Confirmar asistencia</span>
         </button>
+        <span id="err-submit" role="alert" class="field-error -mt-2 justify-center text-center"></span>
       </form>
 
       <div id="rsvp-done" hidden class="animate-fade-up flex flex-col items-center pt-2.5 pb-1 text-center">
@@ -82,6 +83,7 @@ import Illustration from './deco/Illustration.astro';
   const submit = form.querySelector<HTMLButtonElement>('.rsvp-submit')!;
   const label = submit.querySelector('.rsvp-submit-label')!;
   const spinner = submit.querySelector('.rsvp-spinner')!;
+  const submitErr = document.getElementById('err-submit')!;
   let loading = false;
 
   const field = (name: Key) => form.elements.namedItem(name) as HTMLInputElement;
@@ -114,9 +116,16 @@ import Illustration from './deco/Illustration.astro';
     else if (!/^[+\d\s()-]{8,}$/.test(phone)) (setError('phone', 'Revisa el número; por ejemplo +51 987 654 321.'), (ok = false));
     if (!ok) return;
 
+    submitErr.textContent = '';
     setLoading(true);
-    await submitRsvp({ name, phone });
-    setLoading(false);
+    try {
+      await submitRsvp({ name, phone });
+    } catch {
+      submitErr.textContent = 'No pudimos enviar tu confirmación, revisa tu conexión e inténtalo de nuevo.';
+      return;
+    } finally {
+      setLoading(false);
+    }
 
     const first = name.split(/\s+/)[0];
     doneMsg.textContent = `Te esperamos el ${event.dateLong}, ${first}. ¡Qué emoción compartir este día contigo!`;

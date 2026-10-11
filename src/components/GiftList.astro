@@ -7,7 +7,9 @@ import ReserveModal from './ReserveModal.astro';
 
 const chips = [
   { label: 'Todos', count: gifts.length },
-  ...categories.map((c) => ({ label: c, count: gifts.filter((g) => g.cat === c).length })),
+  ...categories
+    .map((c) => ({ label: c, count: gifts.filter((g) => g.cat === c).length }))
+    .filter((c) => c.count > 0),
 ];
 ---
 <section id="regalos" data-screen-label="05 Regalos" class="relative bg-sage-100 px-[18px] pb-[100px]">
@@ -57,6 +59,7 @@ const chips = [
           data-gift-id={g.id}
           data-cat={g.cat}
           data-name={g.name}
+          data-url={giftUrl(g)}
           data-reserved={g.reserved ? 'true' : 'false'}
           data-preset={g.reserved ? 'true' : 'false'}
           class="gift-card relative flex flex-col overflow-hidden rounded-3xl bg-cream shadow-card"
@@ -73,7 +76,7 @@ const chips = [
           <div class="flex flex-1 flex-col gap-2 px-5 pt-[18px] pb-5">
             <div class="gift-dim flex flex-1 flex-col gap-1.5">
               <h3 class="font-display text-[23px] leading-[1.15] font-semibold text-ink">{g.name}</h3>
-              <p class="text-[14.5px] leading-normal text-ink-soft">{g.desc}</p>
+              {g.desc && <p class="text-[14.5px] leading-normal text-ink-soft">{g.desc}</p>}
               <div class="mt-1 flex items-center justify-between gap-2.5 text-sm">
                 <span class="font-extrabold text-ink">Ref. {formatPrice(g.price)}</span>
                 <a href={giftUrl(g)} target="_blank" rel="noopener" class="font-bold">Ver en tienda ↗</a>
@@ -158,9 +161,9 @@ const chips = [
   }
 
   // Estado inicial: reservas guardadas
-  getReservations().then((saved) => {
-    Object.keys(saved).forEach((id) => markReserved(id, false));
-  });
+  getReservations()
+    .catch(() => ({}) as Record<string, string>) // sin conexión: se muestra la lista sin reservas
+    .then((saved) => Object.keys(saved).forEach((id) => markReserved(id, false)));
 
   // Filtros por categoría
   chips.forEach((chip) =>
@@ -186,9 +189,12 @@ const chips = [
   cards.forEach((card) =>
     card.querySelector('[data-reserve]')?.addEventListener('click', () => {
       document.dispatchEvent(
-        new CustomEvent('gift:open', { detail: { id: card.dataset.giftId, name: card.dataset.name } }),
+        new CustomEvent('gift:open', { detail: { id: card.dataset.giftId, name: card.dataset.name, url: card.dataset.url } }),
       );
     }),
   );
-  document.addEventListener('gift:reserved', (e) => markReserved((e as CustomEvent).detail.id, true));
+  document.addEventListener('gift:reserved', (e) => {
+    const { id, animate = true } = (e as CustomEvent).detail;
+    markReserved(id, animate);
+  });
 </script>

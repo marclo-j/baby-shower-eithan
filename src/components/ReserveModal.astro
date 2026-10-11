@@ -34,7 +34,7 @@ import { event } from '../config/event';
 </div>
 
 <script>
-  import { reserveGift } from '../lib/storage';
+  import { reserveGift, ReservationTakenError } from '../lib/storage';
 
   const modal = document.getElementById('reserve-modal')!;
   const dialog = modal.querySelector<HTMLElement>('[role="dialog"]')!;
@@ -42,7 +42,11 @@ import { event } from '../config/event';
   const err = document.getElementById('reserve-err')!;
   const stepForm = modal.querySelector<HTMLElement>('[data-step="form"]')!;
   const stepDone = modal.querySelector<HTMLElement>('[data-step="done"]')!;
+  const confirmBtn = modal.querySelector<HTMLButtonElement>('[data-confirm]')!;
   let giftId: string | null = null;
+  let giftName = '';
+  let giftUrl = '';
+  let saving = false;
   let lastFocus: HTMLElement | null = null;
 
   const setError = (msg: string) => {
@@ -50,8 +54,10 @@ import { event } from '../config/event';
     input.setAttribute('aria-invalid', msg ? 'true' : 'false');
   };
 
-  function open(id: string, name: string) {
+  function open(id: string, name: string, url: string) {
     giftId = id;
+    giftName = name;
+    giftUrl = url;
     lastFocus = document.activeElement as HTMLElement;
     modal.querySelectorAll('[data-gift-name]').forEach((el) => (el.textContent = name));
     input.value = '';
@@ -72,11 +78,30 @@ import { event } from '../config/event';
     lastFocus?.focus();
   }
 
+  function setSaving(on: boolean) {
+    saving = on;
+    confirmBtn.disabled = on;
+    confirmBtn.textContent = on ? 'Reservando…' : 'Confirmar reserva';
+  }
+
   async function confirm() {
     const name = input.value.trim();
     if (!name) return setError('Escribe tu nombre para reservar 💚');
-    if (!giftId) return;
-    await reserveGift(Number(giftId), name);
+    if (!giftId || saving) return;
+    setSaving(true);
+    try {
+      await reserveGift(Number(giftId), giftName, giftUrl, name);
+    } catch (e) {
+      if (e instanceof ReservationTakenError) {
+        setError('¡Uy! Alguien acaba de reservar este regalo 💚');
+        document.dispatchEvent(new CustomEvent('gift:reserved', { detail: { id: giftId, animate: false } }));
+      } else {
+        setError('No pudimos guardar tu reserva, revisa tu conexión e inténtalo de nuevo.');
+      }
+      return;
+    } finally {
+      setSaving(false);
+    }
     modal.querySelector('[data-first]')!.textContent = name.split(/\s+/)[0];
     stepForm.hidden = true;
     stepDone.hidden = false;
@@ -84,13 +109,13 @@ import { event } from '../config/event';
   }
 
   document.addEventListener('gift:open', (e) => {
-    const { id, name } = (e as CustomEvent).detail;
-    open(id, name);
+    const { id, name, url } = (e as CustomEvent).detail;
+    open(id, name, url);
   });
   modal.addEventListener('click', (e) => {
     if (e.target === modal || (e.target as HTMLElement).closest('[data-close]')) close();
   });
-  modal.querySelector('[data-confirm]')!.addEventListener('click', confirm);
+  confirmBtn.addEventListener('click', confirm);
   input.addEventListener('input', () => setError(''));
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') confirm();
