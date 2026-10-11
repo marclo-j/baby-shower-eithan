@@ -1,6 +1,6 @@
 ---
 import { event } from '../config/event';
-import { gifts, categories, formatPrice, giftUrl } from '../data/gifts';
+import { gifts, categories, giftUrl } from '../data/gifts';
 import CloudEdge from './deco/CloudEdge.astro';
 import Illustration from './deco/Illustration.astro';
 import ReserveModal from './ReserveModal.astro';
@@ -77,8 +77,7 @@ const chips = [
             <div class="gift-dim flex flex-1 flex-col gap-1.5">
               <h3 class="font-display text-[23px] leading-[1.15] font-semibold text-ink">{g.name}</h3>
               {g.desc && <p class="text-[14.5px] leading-normal text-ink-soft">{g.desc}</p>}
-              <div class="mt-1 flex items-center justify-between gap-2.5 text-sm">
-                <span class="font-extrabold text-ink">Ref. {formatPrice(g.price)}</span>
+              <div class="mt-1 flex items-center gap-2.5 text-sm">
                 <a href={giftUrl(g)} target="_blank" rel="noopener" class="font-bold">Ver en tienda ↗</a>
               </div>
             </div>

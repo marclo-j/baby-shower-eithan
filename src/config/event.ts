@@ -4,22 +4,22 @@ export const event = {
   parents: 'María & Julio',
 
   // Fecha y hora del evento (zona horaria de Perú, UTC-5)
-  dateISO: '2026-12-13T16:00:00-05:00',
+  dateISO: '2026-11-28T17:30:00-05:00',
   durationHours: 3,
   weekday: 'Sábado',
-  day: '13',
-  month: 'Diciembre',
+  day: '28',
+  month: 'Noviembre',
   year: '2026',
-  time: '16:00 hrs',
-  dateLong: 'sábado 13 de diciembre',
-  dateShort: '13 · 12 · 2026',
+  time: '17:30 hrs',
+  dateLong: 'sábado 28 de noviembre',
+  dateShort: '28 · 11 · 2026',
 
-  rsvpDeadline: '30 de noviembre',
+  rsvpDeadline: '21 de noviembre',
 
   venue: {
-    name: '[Nombre del lugar]',
-    address: '[Dirección]',
-    city: '[Distrito / Ciudad]',
+    name: 'Av. República del Perú 546',
+    address: 'Comas',
+    city: 'Lima',
   },
 
   // Música opcional: deja un archivo en /public/audio y pon su ruta aquí
@@ -29,7 +29,7 @@ export const event = {
 const placeQuery = encodeURIComponent(
   `${event.venue.name} ${event.venue.address} ${event.venue.city}`,
 );
-export const mapsHref = `https://www.google.com/maps/search/?api=1&query=${placeQuery}`;
+export const mapsHref = 'https://maps.app.goo.gl/zEr6ybzjeTbhE8dV8';
 export const wazeHref = `https://waze.com/ul?q=${placeQuery}`;
 
 /** Genera un .ics como data URL para "Agregar al calendario". */
