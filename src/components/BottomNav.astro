@@ -1,14 +1,19 @@
 ---
 const link =
   'nav-link relative z-10 flex min-h-11 items-center rounded-full px-[18px] text-sm font-extrabold text-ink-soft no-underline transition-colors duration-300 ease-out aria-[current=true]:text-ink';
+// En la página /regalos los enlaces van a la invitación y la cápsula queda fija en "Regalos"
+const { mode = 'invite' } = Astro.props;
+const gifts = mode === 'gifts';
 const items = [
-  { href: '#inicio', label: 'Inicio' },
-  { href: '#confirmar', label: 'Asistencia' },
-  { href: '#regalos', label: 'Regalos' },
+  { href: gifts ? '/#inicio' : '#inicio', label: 'Inicio' },
+  { href: gifts ? '/#confirmar' : '#confirmar', label: 'Asistencia' },
+  { href: gifts ? '/regalos' : '#regalos', label: 'Regalos' },
 ];
+const activeIndex = gifts ? 2 : 0;
 ---
 <nav
   id="bottom-nav"
+  data-mode={mode}
   aria-label="Accesos rápidos"
   class="after-open fixed left-1/2 z-[60] flex -translate-x-1/2 gap-1 rounded-full border border-sage-300/60 bg-cream/95 p-[5px] shadow-[0_16px_34px_-16px_rgb(51_66_47/.55)] backdrop-blur-[10px]"
   style="bottom: max(14px, env(safe-area-inset-bottom))"
@@ -19,7 +24,7 @@ const items = [
     class="absolute top-[5px] bottom-[5px] left-0 w-0 rounded-full bg-sage-300 opacity-0 shadow-[0_6px_14px_-8px_rgb(51_66_47/.6)]"
   ></span>
   {items.map((it, i) => (
-    <a href={it.href} class={link} aria-current={i === 0 ? 'true' : 'false'}>{it.label}</a>
+    <a href={it.href} class={link} aria-current={i === activeIndex ? 'true' : 'false'}>{it.label}</a>
   ))}
 </nav>
 
@@ -41,7 +46,8 @@ const items = [
   const nav = document.getElementById('bottom-nav') as HTMLElement;
   const pill = document.getElementById('nav-pill') as HTMLElement;
   const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('.nav-link'));
-  const targets = links.map((a) => document.querySelector<HTMLElement>(a.getAttribute('href')!));
+  const fixed = nav.dataset.mode === 'gifts';
+  const targets = fixed ? [] : links.map((a) => document.querySelector<HTMLElement>(a.getAttribute('href')!));
   let active = -1;
   let lockUntil = 0; // tras un clic, ignora el scroll-spy mientras dura el desplazamiento suave
 
@@ -59,6 +65,7 @@ const items = [
   }
 
   function spy() {
+    if (fixed) return;
     if (performance.now() < lockUntil) return;
     const line = window.innerHeight * 0.45;
     const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
@@ -72,7 +79,7 @@ const items = [
   window.addEventListener('scroll', spy, { passive: true });
   window.addEventListener('resize', () => active >= 0 && movePill(links[active]));
 
-  links.forEach((a, i) =>
+  if (!fixed) links.forEach((a, i) =>
     a.addEventListener('click', () => {
       setActive(i);
       lockUntil = performance.now() + 1000;
@@ -83,6 +90,7 @@ const items = [
   // La barra está oculta hasta abrir la invitación: al mostrarse hay que medir de nuevo
   function init() {
     active = -1;
+    if (fixed) return setActive(links.length - 1);
     spy();
     if (active < 0) setActive(0);
   }

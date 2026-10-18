@@ -142,8 +142,22 @@ import Illustration from './deco/Illustration.astro';
       playLeafTransition({ onCovered: revealPage, onClearing: startHero, holdMs: 1500 });
     };
 
+    // Al volver desde /regalos (que deja esta marca) no se repite el huevo
+    let seen = false;
+    try {
+      seen = sessionStorage.getItem('skip-intro') === '1';
+      sessionStorage.removeItem('skip-intro');
+    } catch {}
+    if (seen) {
+      intro.remove();
+      document.documentElement.style.overflow = '';
+      startHero();
+      // El ancla (#confirmar, #inicio…) se resuelve cuando ya no está el overlay
+      if (location.hash) setTimeout(() => document.querySelector(location.hash)?.scrollIntoView({ behavior: 'instant' }), 0);
+    }
+
     const open = () => {
-      if (intro.dataset.phase !== 'closed') return;
+      if (seen || intro.dataset.phase !== 'closed') return;
       setPhase('opening');
       // La música se inicia en el mismo gesto del usuario (requisito de los navegadores)
       document.dispatchEvent(new CustomEvent('invite:music', { detail: { play: true } }));
@@ -168,7 +182,7 @@ import Illustration from './deco/Illustration.astro';
       });
     };
 
-    egg.addEventListener('click', open);
+    if (!seen) egg.addEventListener('click', open);
     egg.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();

@@ -1,0 +1,22 @@
+---
+import { event } from '../config/event';
+import { gifts } from '../data/gifts';
+import CloudEdge from './deco/CloudEdge.astro';
+import Illustration from './deco/Illustration.astro';
+---
+<section id="regalos" data-screen-label="05 Regalos" class="relative bg-sage-100 px-[18px] pb-[110px]">
+  <CloudEdge color="var(--color-sage-100)" offset={30} />
+  <div class="relative mx-auto flex max-w-[520px] flex-col items-center text-center">
+    <div class="animate-bob h-[150px] w-[150px]">
+      <Illustration src="/img/dino-estego.png" label="Dinosaurio bebé con placas en el lomo" />
+    </div>
+    <div data-reveal class="mt-[22px] flex flex-col items-center">
+      <div class="pl-[.2em] font-display text-[clamp(28px,7vw,40px)] font-medium tracking-[.2em] text-ink">LISTA DE</div>
+      <h2 class="-mt-2 font-script text-[clamp(60px,16vw,88px)] leading-none font-normal text-sage-500">regalos</h2>
+    </div>
+    <p data-reveal class="mt-4 text-[17px] leading-[1.6] text-pretty text-ink-soft">
+      Tu presencia es nuestro mejor regalo, pero si quieres consentir a {event.babyName}, hemos reunido {gifts.length} ideas.
+    </p>
+    <a data-reveal href="/regalos" class="btn-primary mt-7 no-underline">Ver lista de regalos 🎁</a>
+  </div>
+</section>

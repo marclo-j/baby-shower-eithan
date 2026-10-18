@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import GiftList from '../components/GiftList.astro';
+import BottomNav from '../components/BottomNav.astro';
+import { event } from '../config/event';
+---
+<Layout title={`Lista de regalos · Baby Shower de ${event.babyName}`}>
+  <div class="relative min-h-screen overflow-x-clip bg-sage-100">
+    <main>
+      <GiftList />
+    </main>
+    <BottomNav mode="gifts" />
+  </div>
+</Layout>
+
+<script>
+  import { initReveal } from '../lib/motion';
+  // Sin intro: se muestran directamente los elementos que aparecen al abrir la invitación
+  document.documentElement.classList.add('invite-open');
+  try {
+    sessionStorage.setItem('skip-intro', '1');
+  } catch {}
+  initReveal();
+</script>
