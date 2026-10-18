@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import GiftList from '../components/GiftList.astro';
-import BottomNav from '../components/BottomNav.astro';
 import { event } from '../config/event';
 ---
 <Layout title={`Lista de regalos · Baby Shower de ${event.babyName}`}>
@@ -9,7 +8,6 @@ import { event } from '../config/event';
     <main>
       <GiftList />
     </main>
-    <BottomNav mode="gifts" />
   </div>
 </Layout>
 
