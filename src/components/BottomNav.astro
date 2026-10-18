@@ -1,16 +1,92 @@
 ---
 const link =
-  'flex min-h-11 items-center rounded-full px-4 text-sm font-extrabold text-ink no-underline transition-colors duration-300 ease-out hover:bg-sage-100 hover:text-ink';
+  'nav-link relative z-10 flex min-h-11 items-center rounded-full px-[18px] text-sm font-extrabold text-ink-soft no-underline transition-colors duration-300 ease-out aria-[current=true]:text-ink';
+const items = [
+  { href: '#inicio', label: 'Inicio' },
+  { href: '#confirmar', label: 'Asistencia' },
+  { href: '#regalos', label: 'Regalos' },
+];
 ---
 <nav
+  id="bottom-nav"
   aria-label="Accesos rápidos"
   class="after-open fixed left-1/2 z-[60] flex -translate-x-1/2 gap-1 rounded-full border border-sage-300/60 bg-cream/95 p-[5px] shadow-[0_16px_34px_-16px_rgb(51_66_47/.55)] backdrop-blur-[10px]"
   style="bottom: max(14px, env(safe-area-inset-bottom))"
 >
-  <a href="#inicio" class={link}>Inicio</a>
-  <a href="#regalos" class={link}>Regalos</a>
-  <a
-    href="#confirmar"
-    class="flex min-h-11 items-center rounded-full bg-sage-300 px-[18px] text-sm font-extrabold text-ink no-underline transition-colors duration-300 ease-out hover:bg-sage-700 hover:text-cream"
-  >Confirmar</a>
+  <span
+    id="nav-pill"
+    aria-hidden="true"
+    class="absolute top-[5px] bottom-[5px] left-0 w-0 rounded-full bg-sage-300 opacity-0 shadow-[0_6px_14px_-8px_rgb(51_66_47/.6)]"
+  ></span>
+  {items.map((it, i) => (
+    <a href={it.href} class={link} aria-current={i === 0 ? 'true' : 'false'}>{it.label}</a>
+  ))}
 </nav>
+
+<style>
+  #nav-pill {
+    transition:
+      transform 0.45s cubic-bezier(0.3, 1.2, 0.5, 1),
+      width 0.45s cubic-bezier(0.3, 1.2, 0.5, 1),
+      opacity 0.3s ease-out;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #nav-pill {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('bottom-nav') as HTMLElement;
+  const pill = document.getElementById('nav-pill') as HTMLElement;
+  const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('.nav-link'));
+  const targets = links.map((a) => document.querySelector<HTMLElement>(a.getAttribute('href')!));
+  let active = -1;
+  let lockUntil = 0; // tras un clic, ignora el scroll-spy mientras dura el desplazamiento suave
+
+  function movePill(link: HTMLElement) {
+    pill.style.width = `${link.offsetWidth}px`;
+    pill.style.transform = `translateX(${link.offsetLeft}px)`;
+    pill.style.opacity = '1';
+  }
+
+  function setActive(i: number) {
+    if (i === active || i < 0) return;
+    active = i;
+    links.forEach((a, j) => a.setAttribute('aria-current', String(j === i)));
+    movePill(links[i]);
+  }
+
+  function spy() {
+    if (performance.now() < lockUntil) return;
+    const line = window.innerHeight * 0.45;
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+    let current = 0;
+    targets.forEach((t, i) => {
+      if (t && t.getBoundingClientRect().top <= line) current = i;
+    });
+    setActive(atBottom ? links.length - 1 : current);
+  }
+
+  window.addEventListener('scroll', spy, { passive: true });
+  window.addEventListener('resize', () => active >= 0 && movePill(links[active]));
+
+  links.forEach((a, i) =>
+    a.addEventListener('click', () => {
+      setActive(i);
+      lockUntil = performance.now() + 1000;
+      setTimeout(spy, 1050);
+    }),
+  );
+
+  // La barra está oculta hasta abrir la invitación: al mostrarse hay que medir de nuevo
+  function init() {
+    active = -1;
+    spy();
+    if (active < 0) setActive(0);
+  }
+  init();
+  new MutationObserver(init).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  document.fonts?.ready.then(init);
+</script>

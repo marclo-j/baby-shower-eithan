@@ -159,7 +159,7 @@ import Illustration from './deco/Illustration.astro';
       // El huevo se rompe y nace el dino; al terminar el video siguen las hojas.
       // Respaldo por si el video no puede reproducirse o no dispara "ended".
       video.addEventListener('ended', startLeaves, { once: true });
-      const fallback = setTimeout(startLeaves, 9500);
+      const fallback = setTimeout(startLeaves, 6000);
       // iOS solo permite reproducir sin interacción extra si el video está silenciado
       video.muted = true;
       video.play().catch(() => {

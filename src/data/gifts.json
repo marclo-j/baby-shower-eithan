@@ -212,12 +212,12 @@
   {
     "id": 22,
     "cat": "Alimentación",
-    "name": "Silla de comer balancín 3 en 1",
-    "desc": "",
-    "price": 299.9,
+    "name": "Silla de comer 3 en 1 con música, Bluetooth y mesa didáctica",
+    "desc": "Brinda a tu bebé la máxima comodidad en cada etapa de su crecimiento con esta Silla de Comer Multifuncional 3 en 1,…",
+    "price": 459.99,
     "reserved": false,
-    "url": "https://www.falabella.com.pe/falabella-pe/product/143083196/SILLA-DE-COMER-BALANCIN-3-EN-1-BEIGE/143083197",
-    "img": "/img/regalos/22-silla-de-comer-balancin-3-en-1.webp"
+    "url": "https://www.oechsle.pe/silla-de-comer-para-bebe-3-en-1-gato-con-bluetooth---musica---mesa-didactica-y-accesorios-premium-1001959221/p",
+    "img": "/img/regalos/22-silla-de-comer-3-en-1-con-musica-bluetooth-y-mesa-.jpg"
   },
   {
     "id": 23,
@@ -242,12 +242,12 @@
   {
     "id": 25,
     "cat": "Alimentación",
-    "name": "Set Philips Avent 3 biberones anticólicos + escobilla",
+    "name": "Set Philips Avent Natural 3.0: 4 biberones, chupón y escobilla",
     "desc": "",
-    "price": 329.9,
+    "price": 399.9,
     "reserved": false,
-    "url": "https://www.falabella.com.pe/falabella-pe/product/152519082/set-avent-anticolico-antigoteo-3-bbiberones-01-escobilla/152519083",
-    "img": "/img/regalos/25-set-philips-avent-3-biberones-anticolicos-escobill.jpg"
+    "url": "https://www.falabella.com.pe/falabella-pe/product/146703344/Set-De-Regalo-Avent-Natural-3.0-4-Biberones-Chupon-Escobilla/146703345",
+    "img": "/img/regalos/25-set-philips-avent-natural-3-0-4-biberones-chupon-y.webp"
   },
   {
     "id": 26,
@@ -300,13 +300,223 @@
     "img": "/img/regalos/30-rodillo-de-estimulacion-para-gateo.webp"
   },
   {
-    "id": 32,
+    "id": 31,
     "cat": "Higiene y baño",
     "name": "Set de manicura para bebé",
     "desc": "",
     "price": 21.9,
     "reserved": false,
     "url": "https://www.falabella.com.pe/falabella-pe/product/151258506/set-manicura-para-bebes-blanco/151258507",
-    "img": "/img/regalos/32-set-de-manicura-para-bebe.webp"
+    "img": "/img/regalos/31-set-de-manicura-para-bebe.webp"
+  },
+  {
+    "id": 32,
+    "cat": "Ropa",
+    "name": "Conjunto 2 piezas Carters",
+    "desc": "",
+    "price": 79.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/21461526/conjunto-2-piezas-bebe-nino-algodon/21461531",
+    "img": "/img/regalos/32-conjunto-2-piezas-carters.jpg"
+  },
+  {
+    "id": 33,
+    "cat": "Alimentación",
+    "name": "Babero pack x5 Yamp",
+    "desc": "",
+    "price": 59.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/883760338/babero-bebe-nino-pack-x5-algodon-yamp/883760339",
+    "img": "/img/regalos/33-babero-pack-x5-yamp.jpg"
+  },
+  {
+    "id": 34,
+    "cat": "Alimentación",
+    "name": "Mandil babero manga larga azul",
+    "desc": "",
+    "price": 80,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/131026016/Mandil-Babero-Manga-Larga-para-Ninos-6-a-3-anos-azul/131026017",
+    "img": "/img/regalos/34-mandil-babero-manga-larga-azul.jpg"
+  },
+  {
+    "id": 35,
+    "cat": "Alimentación",
+    "name": "Protector de pezón x2 Philips Avent",
+    "desc": "",
+    "price": 69,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/15904499/protector-de-pezon-x-2-unidades/15904499",
+    "img": "/img/regalos/35-protector-de-pezon-x2-philips-avent.jpg"
+  },
+  {
+    "id": 36,
+    "cat": "Juguetes",
+    "name": "Peluche Mecedor +18 Meses Carestino Dino Verde",
+    "desc": "",
+    "price": 339.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/144920456/Peluche-Mecedor-+18-Meses-Carestino-Dino-Verde/144920457",
+    "img": "/img/regalos/36-peluche-mecedor-18-meses-carestino-dino-verde.jpg"
+  },
+  {
+    "id": 37,
+    "cat": "Juguetes",
+    "name": "Libro de tela sensorial blanco y negro",
+    "desc": "",
+    "price": 79.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/140857799/Libro-de-Tela-Sensorial-Blanco-Negro-para-Bebes/140857800",
+    "img": "/img/regalos/37-libro-de-tela-sensorial-blanco-y-negro.jpg"
+  },
+  {
+    "id": 38,
+    "cat": "Higiene y baño",
+    "name": "Shampoo Eucerin Baby pack x3",
+    "desc": "",
+    "price": 299.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/158620018/shampoo-eucerin-baby-2026-pack-03-unidades/158620019",
+    "img": "/img/regalos/38-shampoo-eucerin-baby-pack-x3.webp"
+  },
+  {
+    "id": 39,
+    "cat": "Higiene y baño",
+    "name": "Loción hidratante Eucerin Baby 400 ml",
+    "desc": "",
+    "price": 149.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/158524597/eucerin-baby-locion-hidratante-2026-400ml/158524598",
+    "img": "/img/regalos/39-locion-hidratante-eucerin-baby-400-ml.jpg"
+  },
+  {
+    "id": 40,
+    "cat": "Juguetes",
+    "name": "Gimnasio musical 5 en 1 con pelotas",
+    "desc": "",
+    "price": 199,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/145269043/Gimnasio-Musical-5-en-1-con-Pelotas-Verde/145269044",
+    "img": "/img/regalos/40-gimnasio-musical-5-en-1-con-pelotas.webp"
+  },
+  {
+    "id": 41,
+    "cat": "Ropa",
+    "name": "Zapatos medias de animales 26-27",
+    "desc": "",
+    "price": 90,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/143420101/Zapatos-Medias-De-Animales-26-27/143420102",
+    "img": "/img/regalos/41-zapatos-medias-de-animales-26-27.jpg"
+  },
+  {
+    "id": 42,
+    "cat": "Alimentación",
+    "name": "Set x3 baberos Babita unisex",
+    "desc": "",
+    "price": 33,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/141494190/SET-X3-BABITA-ALIMENTOS-UNISEX-M0650/144933960",
+    "img": "/img/regalos/42-set-x3-baberos-babita-unisex.jpg"
+  },
+  {
+    "id": 43,
+    "cat": "Alimentación",
+    "name": "Bolsas de almacenamiento de leche Lansinoh x100",
+    "desc": "",
+    "price": 150,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/19149909/bolsa-de-almacenamiento-x100und-180-ml-lansinoh/19149909",
+    "img": "/img/regalos/43-bolsas-de-almacenamiento-de-leche-lansinoh-x100.jpg"
+  },
+  {
+    "id": 44,
+    "cat": "Ropa",
+    "name": "Medias Carters pack x2",
+    "desc": "",
+    "price": 39.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/20994032/medias-bebe-nino-pack-x2-algodon-carters/20994033",
+    "img": "/img/regalos/44-medias-carters-pack-x2.webp"
+  },
+  {
+    "id": 45,
+    "cat": "Ropa",
+    "name": "Enterizo de algodón Carters",
+    "desc": "",
+    "price": 59.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/21483495/enterizo-bebe-nino-algodon-carters/21483501",
+    "img": "/img/regalos/45-enterizo-de-algodon-carters.jpg"
+  },
+  {
+    "id": 46,
+    "cat": "Ropa",
+    "name": "Pack x3 hombreras Babita copo de nieve",
+    "desc": "",
+    "price": 79,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/157165463/pack-x3-hombrera-babita-bebe-copo-de-nieve/157165464",
+    "img": "/img/regalos/46-pack-x3-hombreras-babita-copo-de-nieve.webp"
+  },
+  {
+    "id": 47,
+    "cat": "Ropa",
+    "name": "Pack x3 hombreras Babita sobre ruedas",
+    "desc": "",
+    "price": 79,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/148476209/PACK-X3-HOMBRERA-BABITA-BEBE-AQUA-GREEN-FLOWERS/148476210",
+    "img": "/img/regalos/47-pack-x3-hombreras-babita-sobre-ruedas.jpg"
+  },
+  {
+    "id": 48,
+    "cat": "Alimentación",
+    "name": "Pack chupón alimentador con cadena azul",
+    "desc": "",
+    "price": 99,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/155993227/pack-chupon-alimentador-bebe-cadena-sujetadora-azul/155993228",
+    "img": "/img/regalos/48-pack-chupon-alimentador-con-cadena-azul.webp"
+  },
+  {
+    "id": 49,
+    "cat": "Juguetes",
+    "name": "Jirafita sensorial con colgador",
+    "desc": "",
+    "price": 99,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/129765222/Jirafita-Sensorial-con-Colgador-Un-Mundo-por-Descubrir/129765223",
+    "img": "/img/regalos/49-jirafita-sensorial-con-colgador.jpg"
+  },
+  {
+    "id": 50,
+    "cat": "Juguetes",
+    "name": "Peluche cocodrilo sensorial con sonajero",
+    "desc": "",
+    "price": 99,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/141648522/Peluche-Cocodrilo-Sensorial-con-Sonajero-y-Texturas-de-Bebe/141648523",
+    "img": "/img/regalos/50-peluche-cocodrilo-sensorial-con-sonajero.jpg"
+  },
+  {
+    "id": 51,
+    "cat": "Ropa",
+    "name": "Conjunto 2 piezas manga corta Yamp",
+    "desc": "",
+    "price": 59.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/883891012/conjunto-bebe-nino-manga-corta-algodon-yamp/883891013",
+    "img": "/img/regalos/51-conjunto-2-piezas-manga-corta-yamp.jpg"
+  },
+  {
+    "id": 52,
+    "cat": "Ropa",
+    "name": "Conjunto 2 piezas manga corta Bluey",
+    "desc": "",
+    "price": 59.9,
+    "reserved": false,
+    "url": "https://www.falabella.com.pe/falabella-pe/product/883891563/conjunto-bebe-nino-nina-manga-corta-algodon-bluey/883891564",
+    "img": "/img/regalos/52-conjunto-2-piezas-manga-corta-bluey.jpg"
   }
 ]
