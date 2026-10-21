@@ -59,7 +59,16 @@ import { event } from '../config/event';
       render();
     };
     btn.addEventListener('click', () => set(!on));
-    document.addEventListener('invite:music', (e) => set((e as CustomEvent).detail.play));
+    // Al reventar el huevo la canción entra 4 s antes de que empiece la voz (seg. 19)
+    const START_AT = 15;
+    document.addEventListener('invite:music', (e) => {
+      const play = (e as CustomEvent).detail.play;
+      if (play && audio.currentTime === 0) {
+        if (audio.readyState >= 1) audio.currentTime = START_AT;
+        else audio.addEventListener('loadedmetadata', () => (audio.currentTime = START_AT), { once: true });
+      }
+      set(play);
+    });
 
     // Retoma donde iba. Si el navegador bloquea el autoplay (p. ej. iOS), arranca con el primer toque
     const resume = () => {
