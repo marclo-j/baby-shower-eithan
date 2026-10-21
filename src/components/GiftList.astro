@@ -79,9 +79,12 @@ const chips = [
             <div class="gift-dim flex flex-1 flex-col gap-1.5">
               <h3 class="font-display text-[23px] leading-[1.15] font-semibold text-ink">{g.name}</h3>
               {g.desc && <p class="text-[14.5px] leading-normal text-ink-soft">{g.desc}</p>}
-              <div class="mt-1 flex items-center gap-2.5 text-sm">
-                <a href={giftUrl(g)} target="_blank" rel="noopener" class="font-bold">Ver en tienda ↗</a>
-              </div>
+              <a
+                href={giftUrl(g)}
+                target="_blank"
+                rel="noopener"
+                class="mt-2 flex min-h-11 w-full items-center justify-center gap-2 rounded-full border-[1.5px] border-sage-500 bg-cream px-4 text-[15px] font-extrabold text-sage-700 no-underline transition-colors duration-300 ease-out hover:bg-sage-100"
+              >🛍️ Ver en tienda ↗</a>
             </div>
             <button type="button" data-reserve class="gift-reserve btn-primary mt-2 w-full shadow-none">Lo regalo yo 🎁</button>
             <button

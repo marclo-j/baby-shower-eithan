@@ -4,7 +4,7 @@
     "cat": "Paseo",
     "name": "Arnés caminador 2 en 1",
     "desc": "Arnés caminador 2 en 1 Maternelle para bebé. Acolchado y ajustable, acompaña sus primeros pasos con mayor…",
-    "price": 159.9,
+    "price": 149.9,
     "reserved": false,
     "url": "https://www.maternelle.pe/products/arnes-caminador-2-en-1-maternelle?variant=54511566356798",
     "img": "/img/regalos/1-arnes-caminador-2-en-1.jpg"
@@ -264,7 +264,7 @@
     "cat": "Juguetes",
     "name": "Andador caminador 3 en 1",
     "desc": "",
-    "price": 139,
+    "price": 0,
     "reserved": false,
     "url": "https://www.falabella.com.pe/falabella-pe/product/157475283/andador-caminador-para-bebe-3-en-1-azul/157475286",
     "img": "/img/regalos/27-andador-caminador-3-en-1.jpg"
@@ -272,12 +272,12 @@
   {
     "id": 28,
     "cat": "Paseo",
-    "name": "Canguro portabebé ergonómico 3 en 1",
+    "name": "Canguro ergonómico azul multifuncional",
     "desc": "",
-    "price": 130,
+    "price": 150,
     "reserved": false,
-    "url": "https://www.falabella.com.pe/falabella-pe/product/157535770/canguro-portabebe-ergonomico-multifuncional-diseno-circulos-color-negro/157535771",
-    "img": "/img/regalos/28-canguro-portabebe-ergonomico-3-en-1.jpg"
+    "url": "https://www.falabella.com.pe/falabella-pe/product/155977020/canguro-ergonomico-2-en-1-azul-multifuncional-para-bebe/155977021",
+    "img": "/img/regalos/28-canguro-ergonomico-azul-multifuncional.jpg"
   },
   {
     "id": 29,

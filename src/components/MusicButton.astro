@@ -25,7 +25,25 @@ import { event } from '../config/event';
   const audio = document.getElementById('music') as HTMLAudioElement | null;
 
   if (btn && audio) {
+    // La música sigue entre páginas (/ ↔ /regalos): se guarda si estaba sonando y en qué segundo
+    const KEY = 'music-state';
     let on = false;
+    let resumeAt = 0;
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(KEY) ?? 'null');
+      if (saved?.on) {
+        on = true;
+        resumeAt = Number(saved.t) || 0;
+      }
+    } catch {}
+    const save = () => {
+      try {
+        sessionStorage.setItem(KEY, JSON.stringify({ on, t: audio.currentTime }));
+      } catch {}
+    };
+    addEventListener('pagehide', save);
+    document.addEventListener('visibilitychange', () => document.visibilityState === 'hidden' && save());
+
     const render = () => {
       btn.setAttribute('aria-pressed', String(on));
       btn.setAttribute('aria-label', on ? 'Pausar música' : 'Reproducir música');
@@ -42,5 +60,23 @@ import { event } from '../config/event';
     };
     btn.addEventListener('click', () => set(!on));
     document.addEventListener('invite:music', (e) => set((e as CustomEvent).detail.play));
+
+    // Retoma donde iba. Si el navegador bloquea el autoplay (p. ej. iOS), arranca con el primer toque
+    const resume = () => {
+      if (!on) return;
+      if (resumeAt > 0) {
+        try {
+          audio.currentTime = resumeAt;
+        } catch {}
+        resumeAt = 0;
+      }
+      audio.play().catch(() => {
+        const retry = () => on && audio.paused && audio.play().catch(() => {});
+        ['pointerdown', 'keydown', 'touchend'].forEach((ev) => addEventListener(ev, retry, { once: true, passive: true }));
+      });
+    };
+    render();
+    resume();
+    addEventListener('pageshow', (e) => e.persisted && resume());
   }
 </script>

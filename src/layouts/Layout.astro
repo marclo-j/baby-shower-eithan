@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { event } from '../config/event';
+import MusicButton from '../components/MusicButton.astro';
 
 interface Props {
   title?: string;
@@ -31,6 +32,7 @@ const {
     />
   </head>
   <body>
+    <MusicButton />
     <slot />
   </body>
 </html>

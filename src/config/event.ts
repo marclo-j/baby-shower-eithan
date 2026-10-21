@@ -23,7 +23,7 @@ export const event = {
   },
 
   // Música opcional: deja un archivo en /public/audio y pon su ruta aquí
-  musicSrc: '/audio/musica.mp3',
+  musicSrc: '/audio/musica.m4a',
 } as const;
 
 const placeQuery = encodeURIComponent(
