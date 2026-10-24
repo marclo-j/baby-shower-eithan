@@ -264,7 +264,7 @@
     "cat": "Juguetes",
     "name": "Andador caminador 3 en 1",
     "desc": "",
-    "price": 0,
+    "price": 139,
     "reserved": false,
     "url": "https://www.falabella.com.pe/falabella-pe/product/157475283/andador-caminador-para-bebe-3-en-1-azul/157475286",
     "img": "/img/regalos/27-andador-caminador-3-en-1.jpg"
@@ -518,5 +518,15 @@
     "reserved": false,
     "url": "https://www.falabella.com.pe/falabella-pe/product/883891563/conjunto-bebe-nino-nina-manga-corta-algodon-bluey/883891564",
     "img": "/img/regalos/52-conjunto-2-piezas-manga-corta-bluey.jpg"
+  },
+  {
+    "id": 53,
+    "cat": "Paseo",
+    "name": "Coche Moisés de lujo para Bebé Saturno E-Baby Gris",
+    "desc": "Compra el Coche Moisés Saturno E-Baby Gris. El coche cuna ideal para recién nacido con plegado a una mano, asiento…",
+    "price": 349.9,
+    "reserved": false,
+    "url": "https://www.maternelle.pe/products/coche-moises-de-lujo-para-bebe-saturno-e-baby-gris?variant=50189248495934&country=PE&currency=PEN",
+    "img": "/img/regalos/53-coche-moises-de-lujo-para-bebe-saturno-e-baby-gris.jpg"
   }
 ]
