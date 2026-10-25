@@ -11,6 +11,7 @@ Acuarelas PNG con fondo transparente usadas en el sitio:
 | dino-estego.png | Lista de regalos, escena final |
 | helecho.png | Transición de hojas al abrir la invitación y decoración (portada y escena final) |
 | flor.png | Decoración (portada y escena final) |
+| padres.jpg | Foto de los padres en la escena final (marco en arco) |
 
 El huevo animado del intro está en `public/video/`: `huevo.webm` y `huevo.mp4` (el video), `huevo-inicio.webp` (póster) y `huevo-final.webp` (se usa con movimiento reducido).
 

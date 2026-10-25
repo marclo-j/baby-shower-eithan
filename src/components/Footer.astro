@@ -48,7 +48,22 @@ const dinos = [
       <Cloud right="-8%" bottom="-14%" w="42%" z={6} dur={20} delay={-3} />
     </div>
     <div class="mt-[30px] w-full max-w-[420px]"><Bunting n={9} /></div>
-    <p data-reveal class="mt-2.5 font-display text-xl text-ink-soft italic">Con cariño,</p>
+    <figure data-reveal class="relative mt-9 w-[min(78%,300px)]">
+      <div class="aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-[28px] border-[6px] border-cream shadow-[0_18px_40px_-18px_rgba(74,102,80,.45)] ring-1 ring-sage-200">
+        <img
+          src="/img/padres.jpg"
+          alt="María y Julio esperando a Eithan"
+          width="900"
+          height="1092"
+          loading="lazy"
+          decoding="async"
+          class="h-full w-full object-cover object-[50%_30%]"
+        />
+      </div>
+      <Sticker src="/img/flor.png" size={34} right={-10} top={34} rotate={25} dur={7} />
+      <Sticker src="/img/helecho.png" size={84} left={-34} bottom={-10} rotate={200} float={false} op={0.9} />
+    </figure>
+    <p data-reveal class="mt-7 font-display text-xl text-ink-soft italic">Con cariño,</p>
     <p data-reveal class="font-script text-[clamp(42px,10vw,56px)] leading-[1.15] text-sage-700">{event.parents}</p>
     <p class="mt-7 text-[13px] font-bold tracking-[.06em] text-ink-soft">para {event.babyName}</p>
   </div>
