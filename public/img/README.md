@@ -12,6 +12,7 @@ Acuarelas PNG con fondo transparente usadas en el sitio:
 | helecho.png | Transición de hojas al abrir la invitación y decoración (portada y escena final) |
 | flor.png | Decoración (portada y escena final) |
 | padres.jpg | Foto de los padres en la escena final (marco en arco) |
+| ecografia.webp | Ecografía 3D del bebé en círculo, al inicio de la sección del mensaje |
 
 El huevo animado del intro está en `public/video/`: `huevo.webm` y `huevo.mp4` (el video), `huevo-inicio.webp` (póster) y `huevo-final.webp` (se usa con movimiento reducido).
 
