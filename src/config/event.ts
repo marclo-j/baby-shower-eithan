@@ -17,7 +17,7 @@ export const event = {
   rsvpDeadline: '21 de noviembre',
 
   venue: {
-    name: 'Av. República del Perú 546',
+    name: 'Av. República del Perú 585',
     address: 'Comas',
     city: 'Lima',
   },
@@ -29,7 +29,8 @@ export const event = {
 const placeQuery = encodeURIComponent(
   `${event.venue.name} ${event.venue.address} ${event.venue.city}`,
 );
-export const mapsHref = 'https://maps.app.goo.gl/zEr6ybzjeTbhE8dV8';
+// Búsqueda por dirección: se actualiza sola cuando cambia event.venue
+export const mapsHref = `https://www.google.com/maps/search/?api=1&query=${placeQuery}`;
 export const wazeHref = `https://waze.com/ul?q=${placeQuery}`;
 
 /** Genera un .ics como data URL para "Agregar al calendario". */
