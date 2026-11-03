@@ -46,15 +46,20 @@ function doPost(e) {
 function saveRsvp(body) {
   const name = clean(body.name);
   const phone = clean(body.phone);
-  if (!name || !phone) return { ok: false, error: 'invalid' };
+  if (!name) return { ok: false, error: 'invalid' };
 
   const sh = sheet(SHEETS.rsvp);
-  const key = digits(phone);
   const rows = dataRows(sh);
-  const idx = rows.findIndex((r) => digits(r[2]) === key);
+  // Misma persona editando su respuesta: se busca por teléfono si lo dio,
+  // y si no, por nombre (el teléfono ya es opcional)
+  const key = digits(phone);
+  const idx = key
+    ? rows.findIndex((r) => digits(r[2]) === key)
+    : rows.findIndex((r) => String(r[1]).trim().toLowerCase() === name.toLowerCase());
   if (idx >= 0) {
-    // Misma persona editando su respuesta: se actualiza su fila
-    sh.getRange(idx + 2, 2, 1, 3).setValues([[name, phone, new Date()]]);
+    // Conserva el teléfono anterior si esta vez no se envió
+    const prevPhone = rows[idx][2];
+    sh.getRange(idx + 2, 2, 1, 3).setValues([[name, phone || prevPhone, new Date()]]);
   } else {
     sh.appendRow([new Date(), name, phone, '']);
   }

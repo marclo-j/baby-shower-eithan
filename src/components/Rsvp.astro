@@ -34,12 +34,6 @@ import Illustration from './deco/Illustration.astro';
           <span id="err-name" role="alert" class="field-error"></span>
         </label>
 
-        <label class="flex flex-col gap-2">
-          <span class="label">Teléfono o WhatsApp <span class="text-danger">*</span></span>
-          <input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+51 987 654 321" class="field" aria-describedby="err-phone" />
-          <span id="err-phone" role="alert" class="field-error"></span>
-        </label>
-
         <button type="submit" class="rsvp-submit btn-primary min-h-14 w-full text-base">
           <span class="rsvp-spinner hidden h-[18px] w-[18px] animate-spin-slow rounded-full border-[2.5px] border-cream/45 border-t-cream"></span>
           <span class="rsvp-submit-label">Confirmar asistencia</span>
@@ -75,7 +69,7 @@ import Illustration from './deco/Illustration.astro';
   import { submitRsvp } from '../lib/storage';
   import { confetti } from '../lib/motion';
 
-  type Key = 'name' | 'phone';
+  type Key = 'name';
 
   const form = document.getElementById('rsvp-form') as HTMLFormElement;
   const done = document.getElementById('rsvp-done')!;
@@ -100,26 +94,23 @@ import Illustration from './deco/Illustration.astro';
     label.textContent = on ? 'Enviando…' : 'Confirmar asistencia';
   }
 
-  (['name', 'phone'] as const).forEach((k) => field(k).addEventListener('input', () => setError(k, '')));
+  field('name').addEventListener('input', () => setError('name', ''));
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (loading) return;
 
     const name = field('name').value.trim();
-    const phone = field('phone').value.trim();
     let ok = true;
-    (['name', 'phone'] as const).forEach((k) => setError(k, ''));
+    setError('name', '');
     if (!name) (setError('name', 'Cuéntanos tu nombre para saber quién viene 💚'), (ok = false));
     else if (name.length < 3) (setError('name', 'Escribe tu nombre completo, por favor.'), (ok = false));
-    if (!phone) (setError('phone', 'Déjanos un teléfono para poder contactarte.'), (ok = false));
-    else if (!/^[+\d\s()-]{8,}$/.test(phone)) (setError('phone', 'Revisa el número; por ejemplo +51 987 654 321.'), (ok = false));
     if (!ok) return;
 
     submitErr.textContent = '';
     setLoading(true);
     try {
-      await submitRsvp({ name, phone });
+      await submitRsvp({ name });
     } catch {
       submitErr.textContent = 'No pudimos enviar tu confirmación, revisa tu conexión e inténtalo de nuevo.';
       return;

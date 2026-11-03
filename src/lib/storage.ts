@@ -12,7 +12,7 @@ export type Reservations = Record<string, string>; // giftId -> nombre ('' si vi
 
 export type RsvpData = {
   name: string;
-  phone: string;
+  phone?: string; // opcional: el formulario ya no lo pide
 };
 
 /** Otra persona reservó el regalo antes. */
