@@ -9,6 +9,8 @@ export type Gift = {
   price: number;
   /** Reservado de antemano (p. ej. ya comprado por alguien). */
   reserved: boolean;
+  /** Advertencia visible en la tarjeta; los regalos con nota se muestran primero. */
+  note?: string;
   /** Enlace a la tienda; si se omite, se usa una búsqueda en Google. */
   url?: string;
   /** Imagen en /public/img; si se omite, se muestra un placeholder. */
@@ -19,7 +21,7 @@ export const categories = ['Ropa', 'Alimentación', 'Higiene y baño', 'Paseo', 
 export type Category = (typeof categories)[number];
 
 /** Generado con `npm run gifts` a partir de gift-links.json. */
-export const gifts = giftsJson as Gift[];
+export const gifts = [...(giftsJson as Gift[])].sort((a, b) => Number(!!b.note) - Number(!!a.note));
 
 export const formatPrice = (n: number) =>
   'S/ ' + n.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });

@@ -5,7 +5,8 @@
 //   npm run gifts            → importa (no vuelve a bajar fotos existentes)
 //   npm run gifts -- --force → vuelve a bajar todas las fotos
 //
-// Cada entrada de gift-links.json: { url, cat, name?, desc?, price?, reserved? }.
+// Cada entrada de gift-links.json: { url, cat, name?, desc?, price?, reserved?, note? }.
+// `note` es una advertencia que se muestra en la tarjeta y sube el regalo al primer lugar.
 // Los campos opcionales sobrescriben lo extraído de la página.
 // El id de cada regalo es su posición en el archivo y las reservas se guardan
 // por id: agrega los links nuevos SIEMPRE al final.
@@ -144,6 +145,7 @@ async function importGift(entry, id, categories) {
     desc: entry.desc ?? page.desc ?? '',
     price: entry.price ?? page.price ?? 0,
     reserved: entry.reserved ?? false,
+    ...(entry.note && { note: entry.note }),
     url,
     ...(img && { img: `/img/regalos/${img}` }),
   };
