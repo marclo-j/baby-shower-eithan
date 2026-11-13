@@ -20,8 +20,14 @@ export type Gift = {
 export const categories = ['Ropa', 'Alimentación', 'Higiene y baño', 'Paseo', 'Juguetes', 'Habitación'] as const;
 export type Category = (typeof categories)[number];
 
-/** Generado con `npm run gifts` a partir de gift-links.json. */
-export const gifts = [...(giftsJson as Gift[])].sort((a, b) => Number(!!b.note) - Number(!!a.note));
+/**
+ * Generado con `npm run gifts` a partir de gift-links.json.
+ * Orden: los ya reservados al final; entre el resto, los que tienen nota primero.
+ * (Las reservas hechas por invitados se reordenan en el navegador, ver GiftList.astro.)
+ */
+export const gifts = [...(giftsJson as Gift[])].sort(
+  (a, b) => Number(a.reserved) - Number(b.reserved) || Number(!!b.note) - Number(!!a.note),
+);
 
 export const formatPrice = (n: number) =>
   'S/ ' + n.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
