@@ -53,7 +53,7 @@ const chips = [
     </div>
 
     <!-- Tarjetas -->
-    <div id="gift-grid" class="mt-[22px] grid w-full grid-cols-[repeat(auto-fill,minmax(min(100%,290px),1fr))] gap-5 text-left">
+    <div id="gift-grid" data-sorting class="mt-[22px] grid w-full grid-cols-[repeat(auto-fill,minmax(min(100%,290px),1fr))] gap-5 text-left">
       {gifts.map((g, i) => (
         <article
           data-reveal
@@ -112,6 +112,13 @@ const chips = [
     background: var(--color-cream);
     border-color: var(--color-sage-200);
   }
+  /* Oculta la lista hasta ordenar libres/reservados para que no "salte" */
+  #gift-grid {
+    transition: opacity 0.35s ease-out;
+  }
+  #gift-grid[data-sorting] {
+    opacity: 0;
+  }
   .gift-chip[aria-selected="true"] {
     background: var(--color-sage-300);
     border-color: var(--color-sage-500);
@@ -169,10 +176,37 @@ const chips = [
     }
   }
 
+  const grid = document.getElementById('gift-grid')!;
+
+  // Libres primero, reservados al final (orden estable). Solo en la carga inicial:
+  // al reservar en vivo la tarjeta se queda en su sitio con su animación.
+  function sortReservedLast() {
+    cards.filter((c) => c.dataset.reserved === 'true').forEach((c) => grid.append(c));
+    cards.splice(0, cards.length, ...Array.from(grid.querySelectorAll<HTMLElement>('.gift-card')));
+  }
+
   // Estado inicial: reservas guardadas
+  let revealed = false;
+  const reveal = () => {
+    if (revealed) return;
+    revealed = true;
+    grid.removeAttribute('data-sorting');
+  };
+  const timeout = setTimeout(reveal, 3000); // si la hoja tarda, se muestra la lista como está
+
   getReservations()
     .catch(() => ({}) as Record<string, string>) // sin conexión: se muestra la lista sin reservas
-    .then((saved) => Object.keys(saved).forEach((id) => markReserved(id, false)));
+    .then((saved) => {
+      if (!revealed) {
+        Object.keys(saved).forEach((id) => markReserved(id, false));
+        sortReservedLast();
+      } else {
+        // Llegó tarde: solo se marcan, sin mover tarjetas que el usuario ya está viendo
+        Object.keys(saved).forEach((id) => markReserved(id, false));
+      }
+      clearTimeout(timeout);
+      reveal();
+    });
 
   // Filtros por categoría
   chips.forEach((chip) =>
